@@ -32,6 +32,27 @@ function eforms_event_theme(array $existing, string $type, string $theme, string
 }
 
 /**
+ * Implements hook_themes_installed().
+ *
+ * A blokkmodul témaváltáskor átmásolja az alapértelmezett téma összes
+ * blokkját (cím, fülek, üzenetek, menük...) az új témába. A design letisztult
+ * oldalszerkezetéhez csak a fő tartalom és az üzenetek blokkja kell — a
+ * többit töröljük.
+ */
+function eforms_event_themes_installed(array $theme_list): void {
+  if (!in_array('eforms_theme', $theme_list, TRUE)) {
+    return;
+  }
+  $storage = \Drupal::entityTypeManager()->getStorage('block');
+  $keep = ['eforms_theme_content', 'eforms_theme_messages'];
+  foreach ($storage->loadByProperties(['theme' => 'eforms_theme']) as $block) {
+    if (!in_array($block->id(), $keep, TRUE)) {
+      $block->delete();
+    }
+  }
+}
+
+/**
  * Implements hook_mail().
  */
 function eforms_event_mail(string $key, array &$message, array $params): void {

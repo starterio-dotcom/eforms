@@ -1,13 +1,14 @@
 # eForms rendezvény-regisztráció — Drupal 11 + Apache + SQLite.
 FROM php:8.3-apache
 
-# PHP kiterjesztések és rendszereszközök.
+# PHP kiterjesztések és rendszereszközök. (A pdo_sqlite a php image-ben
+# alapból elérhető, ezért nem kell külön fordítani.)
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git unzip sqlite3 \
-        libpng-dev libjpeg62-turbo-dev libwebp-dev libfreetype6-dev libzip-dev \
+        libpng-dev libjpeg-dev libwebp-dev libfreetype6-dev libzip-dev \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype \
-    && docker-php-ext-install -j"$(nproc)" gd zip opcache pdo_sqlite
+    && docker-php-ext-install -j"$(nproc)" gd zip opcache
 
 # Apache: a webroot a Composer projekt web/ könyvtára, .htaccess engedélyezve.
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/web

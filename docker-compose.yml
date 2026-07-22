@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     ports:
-      - "8080:80"
+      - "8090:80"
     volumes:
       # A site állapota (SQLite adatbázis + feltöltött fájlok) kötetben él.
       - eforms-files:/var/www/html/web/sites/default/files

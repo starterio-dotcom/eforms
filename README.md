@@ -33,7 +33,7 @@ docker compose up --build
 Az első indítás letölti a Drupal 11-et (Composer), majd automatikusan telepíti
 a site-ot SQLite adatbázissal — ez néhány percet vesz igénybe. Utána:
 
-- Felület: <http://localhost:8080>
+- Felület: <http://localhost:8090>
 - Admin belépés: `admin` / `admin` (felülírható a `EFORMS_ADMIN_PASSWORD`
   környezeti változóval a `docker-compose.yml`-ben)
 

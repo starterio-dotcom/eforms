@@ -28,13 +28,18 @@ if [ ! -f "$DB" ] || [ ! -f "$SETTINGS" ]; then
     --site-name="eForms felkészítő szakmai tájékoztató nap" \
     --site-mail="oktatas@ujvilag.gov.hu" \
     --account-name=admin \
-    --account-pass="${EFORMS_ADMIN_PASSWORD:-admin}" \
-    --locale=hu
+    --account-pass="${EFORMS_ADMIN_PASSWORD:-admin}"
   echo ">>> Egyedi modul és téma bekapcsolása."
   drush_run -y pm:enable eforms_event
   drush_run -y theme:enable eforms_theme
   drush_run -y config:set system.theme default eforms_theme
   drush_run -y config:set system.site page.front /esemeny
+  # Magyar mint alapértelmezett nyelv (a html lang attribútumhoz).
+  drush_run -y pm:enable language
+  drush_run -y language:add hu || echo "!!! A magyar nyelv hozzáadása nem sikerült — angol marad."
+  drush_run -y config:set system.site default_langcode hu || true
+  # Az alapértelmezett (magyar) URL-ek prefix nélkül szolgálnak ki.
+  drush_run -y config:set language.negotiation url.prefixes.hu '' || true
   # Demó környezet: a levelek a mail-gyűjtőbe kerülnek (nincs SMTP a konténerben).
   drush_run -y config:set system.mail interface.default test_mail_collector
   drush_run -y cache:rebuild

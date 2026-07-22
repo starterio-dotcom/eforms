@@ -284,7 +284,7 @@ class RegistrationForm extends FormBase {
       ]);
     }
     catch (\Throwable $e) {
-      $this->logger('eforms_event')->error('A visszaigazoló e-mail küldése nem sikerült: @error', ['@error' => $e->getMessage()]);
+      \Drupal::logger('eforms_event')->error('A visszaigazoló e-mail küldése nem sikerült: @error', ['@error' => $e->getMessage()]);
     }
 
     $this->tempStoreFactory->get('eforms_event')->set('done', [
