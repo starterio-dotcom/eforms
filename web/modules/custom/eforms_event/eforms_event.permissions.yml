@@ -1,0 +1,4 @@
+administer eforms registrations:
+  title: 'eForms regisztrációk kezelése'
+  description: 'Beérkezett rendezvény-regisztrációk megtekintése és törlése.'
+  restrict access: true

@@ -1,0 +1,6 @@
+eforms_event.registrations:
+  title: 'eForms regisztrációk'
+  description: 'A rendezvényre beérkezett regisztrációk listája.'
+  route_name: entity.eforms_registration.collection
+  parent: system.admin_content
+  weight: 10

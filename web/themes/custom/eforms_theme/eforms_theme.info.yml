@@ -1,0 +1,11 @@
+name: 'eForms Theme'
+type: theme
+description: 'DÁP Design System 1.5 alapú téma az eForms felkészítő rendezvény-regisztrációs felülethez.'
+package: 'eForms'
+core_version_requirement: ^10.3 || ^11
+base theme: false
+logo: images/logo.png
+libraries:
+  - eforms_theme/global
+regions:
+  content: 'Tartalom'

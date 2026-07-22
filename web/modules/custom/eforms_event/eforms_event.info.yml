@@ -1,0 +1,6 @@
+name: 'eForms rendezvény-regisztráció'
+type: module
+description: 'Rendezvényoldal és regisztrációs űrlap az eForms felkészítő szakmai tájékoztató naphoz.'
+package: 'eForms'
+core_version_requirement: ^10.3 || ^11
+configure: entity.eforms_registration.collection

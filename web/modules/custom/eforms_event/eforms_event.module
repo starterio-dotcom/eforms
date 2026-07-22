@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * eForms rendezvény-regisztráció — theme és mail hookok.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function eforms_event_theme(array $existing, string $type, string $theme, string $path): array {
+  return [
+    'eforms_event_page' => [
+      'variables' => [
+        'occasions' => [],
+        'program' => [],
+        'contact_email' => '',
+      ],
+    ],
+    'eforms_register_page' => [
+      'variables' => [
+        'form' => NULL,
+      ],
+    ],
+    'eforms_done' => [
+      'variables' => [
+        'reg' => [],
+        'contact_email' => '',
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_mail().
+ */
+function eforms_event_mail(string $key, array &$message, array $params): void {
+  if ($key !== 'confirmation') {
+    return;
+  }
+  $message['subject'] = 'Visszaigazolás — eForms felkészítő szakmai tájékoztató nap · 2026';
+  $message['body'][] = 'Kedves ' . $params['nev'] . '!';
+  $message['body'][] = 'Köszönjük, regisztrációját rögzítettük az eForms felkészítő szakmai tájékoztató napra.';
+  $message['body'][] = 'Időpont: ' . $params['date_label'] . ' · ' . $params['time_label'];
+  $message['body'][] = 'Részvétel módja: ' . $params['mode'];
+  $message['body'][] = 'Szervező: Új Világ Nonprofit Szolgáltató Kft.';
+  $message['body'][] = 'Kérdés esetén: ' . $params['contact_email'];
+}

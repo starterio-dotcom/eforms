@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Az eForms téma preprocess függvényei.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function eforms_theme_preprocess_page(array &$variables): void {
+  $route = \Drupal::routeMatch()->getRouteName();
+  $variables['is_event_page'] = $route === 'eforms_event.page';
+  $variables['show_back'] = in_array($route, ['eforms_event.register', 'eforms_event.done'], TRUE);
+  $variables['grey_view'] = $route !== 'eforms_event.page';
+  $variables['show_footer'] = $route === 'eforms_event.page';
+  $variables['has_eforms'] = \Drupal::moduleHandler()->moduleExists('eforms_event');
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for form element templates.
+ *
+ * A DÁP mezőmegjelenéshez szükséges osztályok átvezetése a wrapper elemre.
+ */
+function eforms_theme_preprocess_form_element(array &$variables): void {
+  $element = $variables['element'];
+  if (!empty($element['#wrapper_attributes']['class'])) {
+    $variables['attributes']['class'] = array_merge(
+      $variables['attributes']['class'] ?? [],
+      (array) $element['#wrapper_attributes']['class']
+    );
+  }
+}

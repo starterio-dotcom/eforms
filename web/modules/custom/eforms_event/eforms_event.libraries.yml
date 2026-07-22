@@ -1,0 +1,11 @@
+map:
+  version: '1.9.4'
+  css:
+    component:
+      css/leaflet.css: {}
+  js:
+    js/leaflet.vendor.js: { minified: true }
+    js/map.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

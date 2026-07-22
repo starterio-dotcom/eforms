@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - eforms_theme
+id: eforms_theme_content
+theme: eforms_theme
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Fő tartalom'
+  label_display: '0'
+  provider: system
+visibility: {}

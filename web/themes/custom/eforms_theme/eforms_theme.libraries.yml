@@ -1,0 +1,8 @@
+global:
+  version: '1.0'
+  css:
+    base:
+      css/dap.css: {}
+      css/remixicon.css: {}
+    theme:
+      css/page.css: {}

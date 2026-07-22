@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Űrlapelem-sablon DÁP mezőszerkezettel: címke, mező, súgó, hibaüzenet.
+ */
+#}
+{%
+  set classes = [
+    'js-form-item',
+    'form-item',
+    'js-form-type-' ~ type|clean_class,
+    'form-type-' ~ type|clean_class,
+    'js-form-item-' ~ name|clean_class,
+    'form-item-' ~ name|clean_class,
+    'dap-field',
+    'dap-field--' ~ type|clean_class,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% if label_display in ['before', 'invisible'] %}
+    {{ label }}
+  {% endif %}
+  {% if prefix is not empty %}
+    {{ prefix }}
+  {% endif %}
+  {{ children }}
+  {% if suffix is not empty %}
+    {{ suffix }}
+  {% endif %}
+  {% if label_display == 'after' %}
+    {{ label }}
+  {% endif %}
+  {% if description.content %}
+    <div class="dap-helper">{{ description.content }}</div>
+  {% endif %}
+  {% if errors %}
+    <span class="dap-feedback"><span class="dap-feedback__icon">!</span>{{ errors }}</span>
+  {% endif %}
+</div>

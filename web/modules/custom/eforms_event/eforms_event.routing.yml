@@ -1,0 +1,23 @@
+eforms_event.page:
+  path: '/esemeny'
+  defaults:
+    _controller: '\Drupal\eforms_event\Controller\EventController::eventPage'
+    _title: 'eForms felkészítő szakmai tájékoztató nap · 2026'
+  requirements:
+    _access: 'TRUE'
+
+eforms_event.register:
+  path: '/regisztracio'
+  defaults:
+    _controller: '\Drupal\eforms_event\Controller\EventController::registerPage'
+    _title: 'Regisztráció'
+  requirements:
+    _access: 'TRUE'
+
+eforms_event.done:
+  path: '/regisztracio/kesz'
+  defaults:
+    _controller: '\Drupal\eforms_event\Controller\EventController::donePage'
+    _title: 'Sikeres regisztráció'
+  requirements:
+    _access: 'TRUE'

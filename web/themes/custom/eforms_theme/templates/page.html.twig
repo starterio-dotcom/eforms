@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Oldalsablon — fejléc, tartalom, lábléc a Claude Design felület szerint.
+ */
+#}
+<div class="topbar">
+  <div class="wrap hdr">
+    <a href="{{ path('<front>') }}" class="hdr-logo">
+      <img src="{{ base_path ~ directory }}/images/logo.png" alt="Új Világ Nonprofit Szolgáltató Kft." />
+    </a>
+    <span class="hdr-title">eForms felkészítő szakmai tájékoztató nap · 2026</span>
+    {% if has_eforms %}
+      {% if show_back %}
+        <a class="back" href="{{ path('eforms_event.page') }}"><i class="ri-arrow-left-line"></i>Vissza az eseményoldalra</a>
+      {% else %}
+        <a class="dap-btn dap-btn--medium" href="{{ path('eforms_event.register') }}">Regisztráció</a>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+{% if grey_view %}
+  <div class="grey-view">
+    {{ page.content }}
+  </div>
+{% else %}
+  {{ page.content }}
+{% endif %}
+
+{% if show_footer %}
+  <footer>
+    <div class="foot">
+      <div>
+        <p style="font-weight:700;color:#fff">eForms felkészítő szakmai tájékoztató nap · 2026</p>
+        <p>Szervező: Új Világ Nonprofit Szolgáltató Kft.<br>Kérdés esetén: <a href="mailto:oktatas@ujvilag.gov.hu">oktatas@ujvilag.gov.hu</a></p>
+      </div>
+      <div class="foot-links"><a href="#">Adatkezelési tájékoztató</a><a href="#">Impresszum</a></div>
+    </div>
+  </footer>
+{% endif %}

@@ -1,0 +1,88 @@
+eforms_event.settings:
+  type: config_object
+  label: 'eForms rendezvény beállítások'
+  mapping:
+    contact_email:
+      type: email
+      label: 'Kapcsolattartó e-mail'
+    occasions:
+      type: mapping
+      label: 'Alkalmak'
+      mapping:
+        szemelyes:
+          type: eforms_event.occasion
+        online:
+          type: eforms_event.occasion
+    program:
+      type: sequence
+      label: 'Program'
+      sequence:
+        type: mapping
+        mapping:
+          ido:
+            type: label
+            label: 'Idősáv'
+          cim:
+            type: label
+            label: 'Cím'
+          tipus:
+            type: string
+            label: 'Típus (brk = szünet jellegű)'
+          pontok:
+            type: sequence
+            label: 'Pontok'
+            sequence:
+              type: label
+          eloado:
+            type: label
+            label: 'Előadó'
+
+eforms_event.occasion:
+  type: mapping
+  label: 'Alkalom'
+  mapping:
+    label:
+      type: label
+      label: 'Megnevezés'
+    date_label:
+      type: label
+      label: 'Dátum felirat'
+    day:
+      type: label
+      label: 'Nap (dátumdoboz)'
+    month:
+      type: label
+      label: 'Hónap (dátumdoboz)'
+    time_label:
+      type: label
+      label: 'Időpont felirat'
+    detail:
+      type: label
+      label: 'Részletek'
+    capacity:
+      type: integer
+      label: 'Kapacitás'
+    base_taken:
+      type: integer
+      label: 'Induló foglaltság'
+    done_note:
+      type: label
+      label: 'Kiegészítés a visszaigazoláson'
+    cta_label:
+      type: label
+      label: 'CTA gomb felirata'
+    cta_variant:
+      type: string
+      label: 'CTA gomb változata (primary/secondary)'
+    rows:
+      type: sequence
+      label: 'Adatsorok az eseménykártyán'
+      sequence:
+        type: mapping
+        mapping:
+          icon:
+            type: string
+            label: 'RemixIcon osztály'
+          text:
+            type: label
+            label: 'Szöveg'

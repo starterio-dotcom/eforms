@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      # A site állapota (SQLite adatbázis + feltöltött fájlok) kötetben él.
+      - eforms-files:/var/www/html/web/sites/default/files
+      # Az egyedi kód élőben szerkeszthető (módosítás után: drush cr).
+      - ./web/modules/custom:/var/www/html/web/modules/custom
+      - ./web/themes/custom:/var/www/html/web/themes/custom
+    environment:
+      EFORMS_ADMIN_PASSWORD: admin
+
+volumes:
+  eforms-files:

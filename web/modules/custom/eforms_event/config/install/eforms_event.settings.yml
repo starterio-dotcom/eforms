@@ -1,0 +1,97 @@
+contact_email: 'oktatas@ujvilag.gov.hu'
+occasions:
+  szemelyes:
+    label: 'Személyes részvétel'
+    date_label: '2026. augusztus 12., szerda'
+    day: '12'
+    month: 'aug'
+    time_label: '10:00 – 13:10'
+    detail: 'Budapest, Kéthly Anna tér 1., II. emelet, 261-es tárgyaló'
+    capacity: 50
+    base_taken: 41
+    done_note: ' · regisztráció a helyszínen 09:30-tól'
+    cta_label: 'Regisztráció a személyes alkalomra'
+    cta_variant: 'primary'
+    rows:
+      -
+        icon: 'ri-map-pin-2-line'
+        text: 'Budapest, Kéthly Anna tér 1., II. emelet, 261-es tárgyaló'
+      -
+        icon: 'ri-time-line'
+        text: '10:00 – 13:10 · regisztráció 09:30-tól'
+      -
+        icon: 'ri-group-line'
+        text: 'Legfeljebb 50 fő'
+  online:
+    label: 'Online részvétel'
+    date_label: '2026. augusztus 13., csütörtök'
+    day: '13'
+    month: 'aug'
+    time_label: '10:00 – 13:10'
+    detail: 'Élő közvetítés — a linket e-mailben küldjük'
+    capacity: 100
+    base_taken: 37
+    done_note: ''
+    cta_label: 'Regisztráció az online alkalomra'
+    cta_variant: 'secondary'
+    rows:
+      -
+        icon: 'ri-live-line'
+        text: 'Élő online közvetítés — a linket e-mailben küldjük'
+      -
+        icon: 'ri-time-line'
+        text: '10:00 – 13:10'
+      -
+        icon: 'ri-group-line'
+        text: 'Legfeljebb 100 fő'
+program:
+  -
+    ido: '09:30 – 10:00'
+    cim: 'Regisztráció'
+    tipus: 'brk'
+    pontok: []
+    eloado: ''
+  -
+    ido: '10:00 – 10:10'
+    cim: 'Megnyitó beszéd'
+    tipus: ''
+    pontok: []
+    eloado: 'Tótka Tamás, szakmai igazgató · Új Világ Nonprofit Szolgáltató Kft.'
+  -
+    ido: '10:10 – 11:10'
+    cim: 'A nemzeti hirdetmények megújulása az EKR-ben'
+    tipus: ''
+    pontok:
+      - 'A 44/2015. (XI. 2.) MvM rendelet 2026. szeptember 1-jén hatályba lépő módosításai'
+      - 'A nemzeti hirdetmények tartalmának és kitöltési logikájának új, mező szintű szabályozása (KTM közlemény)'
+      - 'A jövőbeni uniós változások (celex, SDK) lekövetése nemzeti és uniós szinten'
+      - 'A nemzeti hirdetmény űrlapok új struktúrája, egységesebb terminológia és validációs működés az uniós eForms logika mentén'
+      - 'A nemzeti és uniós értékkészletek közelítése; az eltérő értékkészletek indoka'
+      - 'Nemzeti nem hirdetményes űrlapok átalakítása az uniós űrlapok mentén'
+      - 'A hirdetmények megfelelő töltését segítő új űrlap tooltip-ek'
+      - 'Korrigendumok egységes kezelése'
+    eloado: 'dr. Zámbó Ákos, főosztályvezető · Nemzeti Fejlesztési Központ, Közbeszerzési Monitoring Főosztály'
+  -
+    ido: '11:10 – 11:40'
+    cim: 'Szünet'
+    tipus: 'brk'
+    pontok: []
+    eloado: ''
+  -
+    ido: '11:40 – 12:40'
+    cim: 'Új funkciók, folyamat változások és az átállás kezelése'
+    tipus: ''
+    pontok:
+      - 'Részek önálló kezelése: részenkénti összegezés és eredmény tájékoztatás lehetősége nemzeti eljárásokban'
+      - 'Részek önálló visszavonásának új lehetősége uniós és nemzeti eljárásokban'
+      - 'Szerződés-menedzser modul átalakítása'
+      - 'DBR meghosszabbítási lehetőség nemzeti eljárásrendben is'
+      - 'EKR-n kívüli, további ajánlattevők rögzítése új eljárási cselekmény bevezetésével'
+      - 'Folyamatban lévő eljárások kezelése az átállás során'
+    eloado: 'dr. Poroszkai-German Gabriella, EKR termékfelelős · TIGRA Zrt.'
+  -
+    ido: '12:40 – 13:10'
+    cim: 'Kérdések és válaszok'
+    tipus: ''
+    pontok: []
+    eloado: 'Mindhárom előadó'

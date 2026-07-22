@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Sikeres regisztráció — összegző kártya.
+ *
+ * Változók:
+ * - reg: nev, email, date_label, mode, time_label, note.
+ * - contact_email: kapcsolattartó e-mail.
+ */
+#}
+<div class="stage">
+  <div class="ccard">
+    <span class="check"><i class="ri-check-line"></i></span>
+    <h1>Sikeres regisztráció!</h1>
+    <p class="clead">Köszönjük, {{ reg.nev }}! Regisztrációját rögzítettük az eForms felkészítő szakmai tájékoztató napra.</p>
+    <div class="recap">
+      <div class="rrow"><i class="ri-calendar-event-line"></i><span><b>{{ reg.date_label }}</b><br>{{ reg.mode }}</span></div>
+      <div class="rrow"><i class="ri-community-line"></i><span>Szervező: Új Világ Nonprofit Szolgáltató Kft.</span></div>
+      <div class="rrow"><i class="ri-time-line"></i><span>{{ reg.time_label }}{{ reg.note }}</span></div>
+    </div>
+    <div class="dap-callout dap-callout--informative">
+      <div class="dap-callout__body">
+        <div class="dap-callout__title">Visszaigazoló e-mailt küldtünk</div>
+        <div class="dap-callout__text">A(z) {{ reg.email }} címre elküldtük a részvétel részleteit. Ha nem találja, ellenőrizze a levélszemét mappát is.</div>
+      </div>
+    </div>
+    <a class="dap-btn dap-btn--medium" href="{{ path('eforms_event.page') }}">Vissza az eseményoldalra</a>
+    <p style="font-size:13px;color:var(--text-neutral-subtle);margin:0">Kérdés esetén: <a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+  </div>
+</div>

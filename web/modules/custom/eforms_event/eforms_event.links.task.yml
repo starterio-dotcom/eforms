@@ -1,0 +1,5 @@
+eforms_event.registrations_tab:
+  title: 'eForms regisztrációk'
+  route_name: entity.eforms_registration.collection
+  base_route: system.admin_content
+  weight: 20

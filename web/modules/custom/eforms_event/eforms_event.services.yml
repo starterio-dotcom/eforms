@@ -1,0 +1,4 @@
+services:
+  eforms_event.capacity:
+    class: Drupal\eforms_event\Service\Capacity
+    arguments: ['@entity_type.manager', '@config.factory']
