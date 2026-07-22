@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\eforms_event\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\PageCache\ResponsePolicy\KillSwitch;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\eforms_event\Form\RegistrationForm;
@@ -20,6 +21,7 @@ class EventController extends ControllerBase {
     protected Capacity $capacity,
     protected PrivateTempStoreFactory $tempStoreFactory,
     protected KillSwitch $pageCacheKillSwitch,
+    protected ModuleExtensionList $moduleList,
   ) {}
 
   /**
@@ -30,7 +32,24 @@ class EventController extends ControllerBase {
       $container->get('eforms_event.capacity'),
       $container->get('tempstore.private'),
       $container->get('page_cache_kill_switch'),
+      $container->get('extension.list.module'),
     );
+  }
+
+  /**
+   * Előadói portré URL-je.
+   *
+   * A helyőrző SVG mellé azonos néven elhelyezett fotó (jpg/jpeg/png/webp)
+   * automatikusan felülírja a helyőrzőt — csere után elég egy cache-ürítés.
+   */
+  protected function speakerImage(string $slug): string {
+    $dir = $this->moduleList->getPath('eforms_event') . '/images/eloadok/';
+    foreach (['jpg', 'jpeg', 'png', 'webp', 'svg'] as $ext) {
+      if (file_exists(DRUPAL_ROOT . '/' . $dir . $slug . '.' . $ext)) {
+        return \Drupal::request()->getBasePath() . '/' . $dir . $slug . '.' . $ext;
+      }
+    }
+    return '';
   }
 
   /**
@@ -42,6 +61,23 @@ class EventController extends ControllerBase {
       '#theme' => 'eforms_event_page',
       '#occasions' => $this->capacity->getOccasions(),
       '#program' => $config->get('program') ?: [],
+      '#speakers' => [
+        [
+          'name' => 'Tótka Tamás',
+          'lines' => ['szakmai igazgató · Új Világ Nonprofit Szolgáltató Kft.', 'Megnyitó beszéd'],
+          'image' => $this->speakerImage('totka-tamas'),
+        ],
+        [
+          'name' => 'dr. Zámbó Ákos',
+          'lines' => ['főosztályvezető · Nemzeti Fejlesztési Központ,', 'Közbeszerzési Monitoring Főosztály'],
+          'image' => $this->speakerImage('zambo-akos'),
+        ],
+        [
+          'name' => 'dr. Poroszkai-German Gabriella',
+          'lines' => ['EKR termékfelelős · TIGRA Zrt.'],
+          'image' => $this->speakerImage('poroszkai-german-gabriella'),
+        ],
+      ],
       '#contact_email' => $config->get('contact_email') ?: '',
       '#attached' => [
         'library' => ['eforms_event/map'],

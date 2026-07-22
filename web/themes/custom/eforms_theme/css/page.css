@@ -136,6 +136,7 @@ footer { background: var(--indigo-1100); color: #fff; margin-top: 64px; }
 .dap-progress__fill { height: 100%; border-radius: 1000px; background: var(--brand-1000); transition: width 240ms; }
 
 .dap-avatar { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 1000px; overflow: hidden; background: var(--brand-100); color: var(--text-brand-base); flex: none; font-family: var(--family-primary), Inter, sans-serif; font-weight: 700; font-size: 24px; }
+.spk-img { width: 64px; height: 64px; border-radius: 1000px; object-fit: cover; display: block; flex: none; background: var(--brand-100); }
 
 .dap-callout { display: flex; gap: 12px; padding: 16px; border-radius: calc(var(--radius-base) * 1px); box-sizing: border-box; }
 .dap-callout--negative { background: var(--background-negative-base); }

@@ -100,18 +100,13 @@
   <h2>Előadók</h2>
   <p class="sub">A kérdések és válaszok szekcióban mindhárom előadó rendelkezésre áll.</p>
   <div class="spk3">
-    <div class="spk">
-      <span class="dap-avatar">TT</span>
-      <h3>Tótka Tamás</h3><p>szakmai igazgató · Új Világ Nonprofit Szolgáltató Kft.<br>Megnyitó beszéd</p>
-    </div>
-    <div class="spk">
-      <span class="dap-avatar">ZÁ</span>
-      <h3>dr. Zámbó Ákos</h3><p>főosztályvezető · Nemzeti Fejlesztési Központ,<br>Közbeszerzési Monitoring Főosztály</p>
-    </div>
-    <div class="spk">
-      <span class="dap-avatar">PG</span>
-      <h3>dr. Poroszkai-German Gabriella</h3><p>EKR termékfelelős · TIGRA Zrt.</p>
-    </div>
+    {% for s in speakers %}
+      <div class="spk">
+        <img class="spk-img" src="{{ s.image }}" alt="{{ s.name }}" width="64" height="64" loading="lazy">
+        <h3>{{ s.name }}</h3>
+        <p>{% for line in s.lines %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</p>
+      </div>
+    {% endfor %}
   </div>
 </section>
 

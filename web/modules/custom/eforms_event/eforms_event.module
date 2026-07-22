@@ -14,6 +14,7 @@ function eforms_event_theme(array $existing, string $type, string $theme, string
       'variables' => [
         'occasions' => [],
         'program' => [],
+        'speakers' => [],
         'contact_email' => '',
       ],
     ],

@@ -68,6 +68,11 @@ docker compose exec web vendor/bin/drush cr
 - **Kapacitás**: szabad helyek = kapacitás − (induló foglaltság + beérkezett
   regisztrációk). Az induló foglaltság (41/50, 37/100 — a designnal egyezően) a
   `eforms_event.settings` konfigban módosítható.
+- **Előadói fotók**: az Előadók szekcióban helyőrző SVG-k vannak
+  (`web/modules/custom/eforms_event/images/eloadok/`). Valódi fotóhoz elég a
+  helyőrző mellé azonos néven `jpg`/`jpeg`/`png`/`webp` fájlt tenni
+  (pl. `totka-tamas.jpg`) — a fotó automatikusan felülírja az SVG-t; utána
+  `drush cr`.
 - **Nyelv**: a felület szövegei magyarul, közvetlenül a modulban/sablonokban
   szerepelnek; a Drupal admin felülete angol marad (a magyar admin fordítás a
   `locale` modullal utólag telepíthető).
