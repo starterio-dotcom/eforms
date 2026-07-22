@@ -37,3 +37,11 @@ eforms_event.imprint:
     _title: 'Impresszum'
   requirements:
     _access: 'TRUE'
+
+eforms_event.export:
+  path: '/admin/content/eforms-registrations/export'
+  defaults:
+    _controller: '\Drupal\eforms_event\Controller\RegistrationExportController::csv'
+    _title: 'Regisztrációk exportálása'
+  requirements:
+    _permission: 'administer eforms registrations'

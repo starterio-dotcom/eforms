@@ -26,7 +26,7 @@ if [ ! -f "$DB" ] || [ ! -f "$SETTINGS" ]; then
   drush_run -y site:install standard \
     --db-url="sqlite://localhost//var/www/html/$DB" \
     --site-name="eForms felkészítő szakmai tájékoztató nap" \
-    --site-mail="oktatas@ujvilag.gov.hu" \
+    --site-mail="ekroktatas@ujvilag.gov.hu" \
     --account-name=admin \
     --account-pass="${EFORMS_ADMIN_PASSWORD:-admin}"
   echo ">>> Egyedi modul és téma bekapcsolása."

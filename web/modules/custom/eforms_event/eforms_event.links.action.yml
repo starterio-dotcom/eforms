@@ -1,0 +1,5 @@
+eforms_event.export_action:
+  route_name: eforms_event.export
+  title: 'Exportálás CSV-be'
+  appears_on:
+    - entity.eforms_registration.collection
