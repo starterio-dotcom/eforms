@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * Impresszum — üzemeltetői és jogi információk.
+ *
+ * A cégadatok (cégjegyzékszám, adószám, képviselő, tárhelyszolgáltató)
+ * „(kitöltendő)” jelöléssel szerepelnek — élesítés előtt a valós adatokkal
+ * kell kitölteni.
+ *
+ * Változók:
+ * - contact_email: kapcsolattartó e-mail (config).
+ */
+#}
+<div class="wrap">
+  <div class="page-head">
+    <h1>Impresszum</h1>
+    <p>eForms felkészítő szakmai tájékoztató nap · 2026 — a rendezvényoldal üzemeltetőjének adatai és jogi tudnivalók.</p>
+  </div>
+  <div class="layout">
+    <div class="doc-panel">
+
+      <h2>1. Az oldal üzemeltetője</h2>
+      <ul class="doc-datalist">
+        <li><b>Név:</b> Új Világ Nonprofit Szolgáltató Kft.</li>
+        <li><b>Székhely:</b> 1077 Budapest, Kéthly Anna tér 1.</li>
+        <li><b>E-mail:</b> <a href="mailto:{{ contact_email }}">{{ contact_email }}</a></li>
+        <li><b>Cégjegyzékszám:</b> (kitöltendő)</li>
+        <li><b>Adószám:</b> (kitöltendő)</li>
+        <li><b>Képviseli:</b> (kitöltendő)</li>
+      </ul>
+
+      <h2>2. Tárhelyszolgáltató</h2>
+      <ul class="doc-datalist">
+        <li><b>Név:</b> (kitöltendő)</li>
+        <li><b>Székhely:</b> (kitöltendő)</li>
+        <li><b>E-mail:</b> (kitöltendő)</li>
+      </ul>
+
+      <h2>3. Kapcsolat</h2>
+      <p>A rendezvénnyel és az oldallal kapcsolatos kérdéseket a <a href="mailto:{{ contact_email }}">{{ contact_email }}</a> címen fogadjuk.</p>
+
+      <h2>4. Szerzői jogok</h2>
+      <p>Az oldalon megjelenő tartalmak — szövegek, grafikai elemek, arculat — az üzemeltető, illetve a feltüntetett jogtulajdonosok szellemi tulajdonát képezik. A tartalmak a forrás megjelölésével, változtatás nélkül idézhetők; ettől eltérő felhasználásukhoz az üzemeltető előzetes írásbeli hozzájárulása szükséges.</p>
+
+      <h2>5. Felelősség</h2>
+      <p>Az oldalon közölt információk tájékoztató jellegűek. Az üzemeltető törekszik azok pontosságára és naprakészségére, de az esetleges elírásokból vagy a program változásából eredő eltérésekért felelősséget nem vállal; a rendezvény részleteiről a regisztrációt visszaigazoló e-mail az irányadó.</p>
+
+      <h2>6. Felhasznált technológiák és források</h2>
+      <ul>
+        <li><a href="https://www.drupal.org" target="_blank" rel="noopener">Drupal</a> tartalomkezelő rendszer (GPL-2.0-or-later)</li>
+        <li>DÁP Design System 1.5 arculati elemek</li>
+        <li><a href="https://rsms.me/inter/" target="_blank" rel="noopener">Inter</a> betűtípus (SIL Open Font License)</li>
+        <li><a href="https://remixicon.com" target="_blank" rel="noopener">RemixIcon</a> ikonkészlet (Apache-2.0)</li>
+        <li><a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a> térképmegjelenítő (BSD-2-Clause)</li>
+        <li>Térképadatok: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> közreműködők</li>
+      </ul>
+
+      <div class="doc-cta">
+        <a class="dap-btn dap-btn--medium" href="{{ path('eforms_event.page') }}">Vissza az eseményoldalra</a>
+        <a class="back" href="{{ path('eforms_event.privacy') }}"><i class="ri-shield-check-line"></i>Adatkezelési tájékoztató</a>
+      </div>
+    </div>
+  </div>
+</div>

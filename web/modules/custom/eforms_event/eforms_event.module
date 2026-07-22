@@ -33,6 +33,11 @@ function eforms_event_theme(array $existing, string $type, string $theme, string
         'contact_email' => '',
       ],
     ],
+    'eforms_imprint' => [
+      'variables' => [
+        'contact_email' => '',
+      ],
+    ],
   ];
 }
 

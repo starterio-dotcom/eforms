@@ -29,3 +29,11 @@ eforms_event.privacy:
     _title: 'Adatkezelési tájékoztató'
   requirements:
     _access: 'TRUE'
+
+eforms_event.imprint:
+  path: '/impresszum'
+  defaults:
+    _controller: '\Drupal\eforms_event\Controller\EventController::imprintPage'
+    _title: 'Impresszum'
+  requirements:
+    _access: 'TRUE'

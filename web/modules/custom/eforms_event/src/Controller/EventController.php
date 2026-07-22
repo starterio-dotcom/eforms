@@ -113,4 +113,17 @@ class EventController extends ControllerBase {
     ];
   }
 
+  /**
+   * Impresszum oldal.
+   */
+  public function imprintPage(): array {
+    return [
+      '#theme' => 'eforms_imprint',
+      '#contact_email' => $this->config('eforms_event.settings')->get('contact_email') ?: '',
+      '#cache' => [
+        'tags' => ['config:eforms_event.settings'],
+      ],
+    ];
+  }
+
 }

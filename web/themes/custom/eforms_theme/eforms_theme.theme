@@ -11,7 +11,7 @@
 function eforms_theme_preprocess_page(array &$variables): void {
   $route = \Drupal::routeMatch()->getRouteName();
   $variables['is_event_page'] = $route === 'eforms_event.page';
-  $variables['show_back'] = in_array($route, ['eforms_event.register', 'eforms_event.done', 'eforms_event.privacy'], TRUE);
+  $variables['show_back'] = in_array($route, ['eforms_event.register', 'eforms_event.done', 'eforms_event.privacy', 'eforms_event.imprint'], TRUE);
   $variables['grey_view'] = $route !== 'eforms_event.page';
   $variables['show_footer'] = $route === 'eforms_event.page';
   $variables['has_eforms'] = \Drupal::moduleHandler()->moduleExists('eforms_event');

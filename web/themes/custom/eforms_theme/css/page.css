@@ -206,6 +206,9 @@ footer { background: var(--indigo-1100); color: #fff; margin-top: 64px; }
 .doc-panel li { font-size: 15px; line-height: 1.6; color: var(--text-neutral-base); }
 .doc-panel b { color: var(--text-neutral-strong); }
 .doc-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 28px; }
+.doc-datalist { list-style: none; padding: 0; margin: 0 0 12px; border: 1px solid var(--border-neutral-divider); border-radius: 12px; overflow: hidden; }
+.doc-datalist li { padding: 10px 16px; font-size: 15px; line-height: 1.5; }
+.doc-datalist li + li { border-top: 1px solid var(--border-neutral-divider); }
 @media (max-width: 640px) { .doc-panel { padding: 28px 22px; } }
 
 /* Térkép */
