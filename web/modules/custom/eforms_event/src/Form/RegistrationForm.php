@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
+use Drupal\Core\Url;
 use Drupal\eforms_event\Entity\Registration;
 use Drupal\eforms_event\Service\Capacity;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -182,8 +183,9 @@ class RegistrationForm extends FormBase {
     if (isset($errors['gdpr'])) {
       $form['fs_gdpr']['box']['gdpr']['#attributes']['class'][] = 'error';
     }
+    $privacy_url = Url::fromRoute('eforms_event.privacy')->toString();
     $form['fs_gdpr']['box']['note'] = [
-      '#markup' => '<p>A megadott adatokat kizárólag a rendezvény szervezésével összefüggésben, a regisztráció kezelése és a kapcsolattartás céljából kezeljük. Részletek az <a href="#">adatkezelési tájékoztatóban</a>.</p>',
+      '#markup' => Markup::create('<p>A megadott adatokat kizárólag a rendezvény szervezésével összefüggésben, a regisztráció kezelése és a kapcsolattartás céljából kezeljük. Részletek az <a href="' . $privacy_url . '" target="_blank" rel="noopener">adatkezelési tájékoztatóban</a>.</p>'),
     ];
     if (isset($errors['gdpr'])) {
       $form['fs_gdpr']['box']['gdpr_error'] = $this->feedback($errors['gdpr']);

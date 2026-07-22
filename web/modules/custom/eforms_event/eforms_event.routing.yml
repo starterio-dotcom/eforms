@@ -21,3 +21,11 @@ eforms_event.done:
     _title: 'Sikeres regisztráció'
   requirements:
     _access: 'TRUE'
+
+eforms_event.privacy:
+  path: '/adatkezelesi-tajekoztato'
+  defaults:
+    _controller: '\Drupal\eforms_event\Controller\EventController::privacyPage'
+    _title: 'Adatkezelési tájékoztató'
+  requirements:
+    _access: 'TRUE'

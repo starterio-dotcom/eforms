@@ -197,6 +197,17 @@ footer { background: var(--indigo-1100); color: #fff; margin-top: 64px; }
 .messages--status { background: var(--positive-100); }
 .messages__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
 
+/* Dokumentum-oldal (adatkezelési tájékoztató) */
+.doc-panel { background: var(--white-100); border: 1px solid var(--border-neutral-subtle); border-radius: 16px; padding: 36px 40px; max-width: 760px; box-sizing: border-box; }
+.doc-panel .doc-meta { margin: 0 0 20px; font-size: 13px; font-weight: 700; color: var(--text-neutral-subtle); }
+.doc-panel h2 { margin: 26px 0 10px; font-weight: 700; font-size: 19px; letter-spacing: -.01em; color: var(--text-neutral-strong); }
+.doc-panel p { margin: 0 0 12px; font-size: 15px; line-height: 1.65; color: var(--text-neutral-base); }
+.doc-panel ul { margin: 0 0 12px; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.doc-panel li { font-size: 15px; line-height: 1.6; color: var(--text-neutral-base); }
+.doc-panel b { color: var(--text-neutral-strong); }
+.doc-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 28px; }
+@media (max-width: 640px) { .doc-panel { padding: 28px 22px; } }
+
 /* Térkép */
 #eforms-map { min-height: 280px; height: 100%; width: 100%; border: 1px solid var(--border-neutral-subtle); border-radius: 16px; box-sizing: border-box; }
 .venue-pin { background: #4258ed; width: 18px; height: 18px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.35); }

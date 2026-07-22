@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Adatkezelési tájékoztató — dokumentum-oldal a rendezvény-regisztrációhoz.
+ *
+ * Változók:
+ * - contact_email: kapcsolattartó e-mail (config).
+ */
+#}
+<div class="wrap">
+  <div class="page-head">
+    <h1>Adatkezelési tájékoztató</h1>
+    <p>eForms felkészítő szakmai tájékoztató nap · 2026 — a rendezvény-regisztráció során megadott személyes adatok kezeléséről.</p>
+  </div>
+  <div class="layout">
+    <div class="doc-panel">
+      <p class="doc-meta">Hatályos: 2026. július 1-jétől · Verzió: 1.0</p>
+
+      <h2>1. Az adatkezelő</h2>
+      <p>Az adatkezelő az <b>Új Világ Nonprofit Szolgáltató Kft.</b> (a továbbiakban: Adatkezelő), az eForms felkészítő szakmai tájékoztató nap szervezője.</p>
+      <p>Kapcsolat az adatkezeléssel összefüggő ügyekben: <a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+
+      <h2>2. A kezelt adatok köre</h2>
+      <p>A rendezvényre történő regisztráció során az alábbi személyes adatokat kezeljük:</p>
+      <ul>
+        <li><b>Teljes név</b> — a résztvevő azonosításához,</li>
+        <li><b>E-mail-cím</b> — a visszaigazoláshoz és a rendezvénnyel kapcsolatos tájékoztatáshoz (online részvétel esetén a csatlakozási link megküldéséhez),</li>
+        <li><b>Telefonszám</b> (megadása önkéntes) — a rendezvénnyel kapcsolatos gyors kapcsolatfelvételhez,</li>
+        <li><b>Választott alkalom</b> (személyes vagy online részvétel) — a létszám és a helyszíni beléptetés szervezéséhez.</li>
+      </ul>
+
+      <h2>3. Az adatkezelés célja és jogalapja</h2>
+      <p>Az adatkezelés célja kizárólag a rendezvény szervezése: a regisztráció rögzítése és visszaigazolása, a résztvevői létszám kezelése, a helyszíni beléptetés, valamint az online közvetítés elérésének biztosítása és az ezekkel összefüggő kapcsolattartás.</p>
+      <p>Az adatkezelés jogalapja az érintett <b>hozzájárulása</b> (GDPR 6. cikk (1) bekezdés a) pont), amelyet a regisztrációs űrlapon, az adatkezelési tájékoztató elfogadásával ad meg. A hozzájárulás bármikor visszavonható; a visszavonás nem érinti a visszavonás előtti adatkezelés jogszerűségét.</p>
+      <p>A megadott adatokat marketingcélra nem használjuk, hírlevélre nem iratkoztatjuk fel, és harmadik fél részére üzleti célból nem adjuk át.</p>
+
+      <h2>4. Az adatkezelés időtartama</h2>
+      <p>A regisztráció során megadott adatokat a rendezvény lezárását követő <b>30 napon belül töröljük</b>, kivéve, ha jogszabály hosszabb megőrzési időt ír elő, vagy az érintett a törlést korábban kéri.</p>
+
+      <h2>5. Adatfeldolgozók, adattovábbítás</h2>
+      <p>Az adatokat az Adatkezelő munkatársai közül kizárólag a rendezvény szervezésében részt vevők ismerhetik meg. Az adatok tárolása az Adatkezelő által üzemeltetett informatikai rendszerben történik; az e-mail-küldéshez igénybe vett levelezőszolgáltató technikai adatfeldolgozóként járhat el. Az adatokat az Európai Gazdasági Térségen kívülre nem továbbítjuk.</p>
+
+      <h2>6. Az Ön jogai</h2>
+      <p>Az érintett a fenti elérhetőségen bármikor kérheti:</p>
+      <ul>
+        <li><b>hozzáférést</b> a kezelt személyes adataihoz (tájékoztatás),</li>
+        <li>adatai <b>helyesbítését</b>, ha azok pontatlanok,</li>
+        <li>adatai <b>törlését</b> (a regisztráció ezzel együtt megszűnik),</li>
+        <li>az adatkezelés <b>korlátozását</b>,</li>
+        <li>hozzájárulása <b>visszavonását</b>, valamint</li>
+        <li>adatai <b>hordozható formátumban</b> történő kiadását.</li>
+      </ul>
+      <p>A kérelmekre legkésőbb 30 napon belül válaszolunk.</p>
+
+      <h2>7. Jogorvoslat</h2>
+      <p>Ha megítélése szerint az adatkezelés jogsértő, panaszt tehet a <b>Nemzeti Adatvédelmi és Információszabadság Hatóságnál</b> (NAIH — 1055 Budapest, Falk Miksa utca 9–11.; <a href="https://www.naih.hu" target="_blank" rel="noopener">www.naih.hu</a>), vagy bírósághoz fordulhat.</p>
+
+      <h2>8. Sütik (cookie-k)</h2>
+      <p>A regisztrációs felület kizárólag a működéshez technikailag szükséges munkamenet-sütit használ; statisztikai vagy marketingcélú sütiket nem alkalmazunk. A helyszín térképét az OpenStreetMap szolgáltatja, a térképcsempék betöltésekor a böngésző az OpenStreetMap szervereihez kapcsolódik.</p>
+
+      <div class="doc-cta">
+        <a class="dap-btn dap-btn--medium" href="{{ path('eforms_event.register') }}">Tovább a regisztrációhoz</a>
+        <a class="back" href="{{ path('eforms_event.page') }}"><i class="ri-arrow-left-line"></i>Vissza az eseményoldalra</a>
+      </div>
+    </div>
+  </div>
+</div>

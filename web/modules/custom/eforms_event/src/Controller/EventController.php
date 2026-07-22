@@ -100,4 +100,17 @@ class EventController extends ControllerBase {
     ];
   }
 
+  /**
+   * Adatkezelési tájékoztató oldal.
+   */
+  public function privacyPage(): array {
+    return [
+      '#theme' => 'eforms_privacy',
+      '#contact_email' => $this->config('eforms_event.settings')->get('contact_email') ?: '',
+      '#cache' => [
+        'tags' => ['config:eforms_event.settings'],
+      ],
+    ];
+  }
+
 }
