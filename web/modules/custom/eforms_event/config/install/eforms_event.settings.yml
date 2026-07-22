@@ -10,6 +10,7 @@ occasions:
     capacity: 50
     base_taken: 41
     done_note: ' · regisztráció a helyszínen 09:30-tól'
+    done_mode: 'Személyes részvétel — Budapest, Kéthly Anna tér 1., II. emelet, 261-es tárgyaló'
     cta_label: 'Regisztráció a személyes alkalomra'
     cta_variant: 'primary'
     rows:
@@ -32,6 +33,7 @@ occasions:
     capacity: 100
     base_taken: 37
     done_note: ''
+    done_mode: 'Online részvétel — a csatlakozási linket e-mailben küldjük'
     cta_label: 'Regisztráció az online alkalomra'
     cta_variant: 'secondary'
     rows:

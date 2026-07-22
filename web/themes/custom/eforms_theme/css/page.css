@@ -215,3 +215,13 @@ footer { background: var(--indigo-1100); color: #fff; margin-top: 64px; }
 /* Térkép */
 #eforms-map { min-height: 280px; height: 100%; width: 100%; border: 1px solid var(--border-neutral-subtle); border-radius: 16px; box-sizing: border-box; }
 .venue-pin { background: #4258ed; width: 18px; height: 18px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+
+/* „Ugrás a fő tartalomra” link fókuszban */
+.skip-link:focus { position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--brand-1000); color: var(--white-100); padding: 12px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; outline: 2px solid var(--white-100); outline-offset: 2px; }
+#main-content { outline: none; }
+
+/* Csökkentett mozgás */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .evc:hover { transform: none; }
+}

@@ -4,7 +4,7 @@
  * Oldalsablon — fejléc, tartalom, lábléc a Claude Design felület szerint.
  */
 #}
-<div class="topbar">
+<header class="topbar">
   <div class="wrap hdr">
     <a href="{{ path('<front>') }}" class="hdr-logo">
       <img src="{{ base_path ~ directory }}/images/logo.png" alt="Új Világ Nonprofit Szolgáltató Kft." />
@@ -12,21 +12,23 @@
     <span class="hdr-title">eForms felkészítő szakmai tájékoztató nap · 2026</span>
     {% if has_eforms %}
       {% if show_back %}
-        <a class="back" href="{{ path('eforms_event.page') }}"><i class="ri-arrow-left-line"></i>Vissza az eseményoldalra</a>
+        <a class="back" href="{{ path('eforms_event.page') }}"><i class="ri-arrow-left-line" aria-hidden="true"></i>Vissza az eseményoldalra</a>
       {% else %}
         <a class="dap-btn dap-btn--medium" href="{{ path('eforms_event.register') }}">Regisztráció</a>
       {% endif %}
     {% endif %}
   </div>
-</div>
+</header>
 
-{% if grey_view %}
-  <div class="grey-view">
+<main id="main-content" tabindex="-1">
+  {% if grey_view %}
+    <div class="grey-view">
+      {{ page.content }}
+    </div>
+  {% else %}
     {{ page.content }}
-  </div>
-{% else %}
-  {{ page.content }}
-{% endif %}
+  {% endif %}
+</main>
 
 {% if show_footer %}
   <footer>

@@ -15,9 +15,9 @@
     <h1>A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei</h1>
     <p class="lead">Az Új Világ Nonprofit Szolgáltató Kft. szervezésében — ajánlatkérőknek, gazdasági szereplőknek, tanácsadóknak és egyéb érintetteknek, az EKR-ben bevezetésre kerülő űrlap- és folyamatszintű változásokról. A részvétel díjmentes, de előzetes regisztrációhoz kötött.</p>
     <div class="meta-row">
-      <span class="meta-chip"><i class="ri-calendar-event-line"></i>2026. augusztus 12. · személyes</span>
-      <span class="meta-chip"><i class="ri-live-line"></i>2026. augusztus 13. · online</span>
-      <span class="meta-chip"><i class="ri-money-euro-circle-line"></i>A részvétel ingyenes</span>
+      <span class="meta-chip"><i class="ri-calendar-event-line" aria-hidden="true"></i>2026. augusztus 12. · személyes</span>
+      <span class="meta-chip"><i class="ri-live-line" aria-hidden="true"></i>2026. augusztus 13. · online</span>
+      <span class="meta-chip"><i class="ri-money-euro-circle-line" aria-hidden="true"></i>A részvétel ingyenes</span>
     </div>
     <div class="cta">
       <a class="dap-btn" href="{{ path('eforms_event.register') }}">Regisztrálok</a>
@@ -30,9 +30,9 @@
   <h2>Miről lesz szó?</h2>
   <p class="sub">A tájékoztató nap célja bemutatni, hogy a változások milyen gyakorlati hatással járnak az EKR felhasználói számára, és hogyan változik az egyes eljárások kezelése a megújuló rendszerben.</p>
   <div class="cards3">
-    <div class="tcard"><span class="ico"><i class="ri-scales-3-line"></i></span><h3>Jogszabályi változások</h3><p>A 44/2015. (XI. 2.) MvM rendelet 2026. szeptember 1-jén hatályba lépő módosításai és a mező szintű szabályozás (KTM közlemény).</p></div>
-    <div class="tcard"><span class="ico"><i class="ri-file-list-3-line"></i></span><h3>Megújuló hirdetmény űrlapok</h3><p>Új struktúra, egységesebb terminológia és validáció az uniós eForms logika mentén; a nemzeti és uniós értékkészletek közelítése.</p></div>
-    <div class="tcard"><span class="ico"><i class="ri-refresh-line"></i></span><h3>Új funkciók és átállás</h3><p>Részek önálló kezelése és visszavonása, szerződés-menedzser modul átalakítása, valamint a folyamatban lévő eljárások kezelése az átállás során.</p></div>
+    <div class="tcard"><span class="ico"><i class="ri-scales-3-line" aria-hidden="true"></i></span><h3>Jogszabályi változások</h3><p>A 44/2015. (XI. 2.) MvM rendelet 2026. szeptember 1-jén hatályba lépő módosításai és a mező szintű szabályozás (KTM közlemény).</p></div>
+    <div class="tcard"><span class="ico"><i class="ri-file-list-3-line" aria-hidden="true"></i></span><h3>Megújuló hirdetmény űrlapok</h3><p>Új struktúra, egységesebb terminológia és validáció az uniós eForms logika mentén; a nemzeti és uniós értékkészletek közelítése.</p></div>
+    <div class="tcard"><span class="ico"><i class="ri-refresh-line" aria-hidden="true"></i></span><h3>Új funkciók és átállás</h3><p>Részek önálló kezelése és visszavonása, szerződés-menedzser modul átalakítása, valamint a folyamatban lévő eljárások kezelése az átállás során.</p></div>
   </div>
 </section>
 
@@ -51,12 +51,12 @@
         </div>
         <div class="evc-rows">
           {% for row in o.rows %}
-            <div><i class="{{ row.icon }}"></i>{{ row.text }}</div>
+            <div><i class="{{ row.icon }}" aria-hidden="true"></i>{{ row.text }}</div>
           {% endfor %}
         </div>
         <div class="cap">
           <div class="cap-line"><span>Szabad helyek</span><span>{{ o.free }} / {{ o.capacity }}</span></div>
-          <div class="dap-progress" role="progressbar" aria-valuenow="{{ o.taken }}" aria-valuemin="0" aria-valuemax="{{ o.capacity }}">
+          <div class="dap-progress" role="progressbar" aria-label="Foglaltság — {{ o.label }}" aria-valuenow="{{ o.taken }}" aria-valuemin="0" aria-valuemax="{{ o.capacity }}" aria-valuetext="{{ o.taken }} foglalt hely a {{ o.capacity }}-ből">
             <div class="dap-progress__fill" style="width: {{ o.capacity > 0 ? ((o.taken / o.capacity) * 100)|round : 0 }}%"></div>
           </div>
         </div>
@@ -88,7 +88,7 @@
             </ul>
           {% endif %}
           {% if p.eloado %}
-            <span class="peloado"><i class="ri-user-voice-line"></i>{{ p.eloado }}</span>
+            <span class="peloado"><i class="ri-user-voice-line" aria-hidden="true"></i>{{ p.eloado }}</span>
           {% endif %}
         </div>
       </div>
@@ -113,10 +113,10 @@
 <section class="blk" id="helyszin">
   <h2>Helyszín és tudnivalók</h2>
   <div class="venue" style="margin-top:24px">
-    <div id="eforms-map" aria-label="Térkép — Kéthly Anna tér 1."></div>
+    <div id="eforms-map" role="region" aria-label="Térkép — Kéthly Anna tér 1."></div>
     <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="tcard"><h3 style="display:flex;align-items:center;gap:10px"><i class="ri-building-2-line" style="color:var(--brand-1000)"></i>Személyes alkalom</h3><p>Budapest, Kéthly Anna tér 1., II. emelet, 261-es tárgyaló. A regisztráció a helyszínen 09:30-tól, a program 10:00-kor kezdődik; 11:10 és 11:40 között szünetet tartunk.</p></div>
-      <div class="tcard"><h3 style="display:flex;align-items:center;gap:10px"><i class="ri-computer-line" style="color:var(--brand-1000)"></i>Online alkalom</h3><p>A csatlakozási linket és a technikai tudnivalókat a regisztrációt visszaigazoló e-mailben, valamint az esemény előtti napon küldjük ki.</p></div>
+      <div class="tcard"><h3 style="display:flex;align-items:center;gap:10px"><i class="ri-building-2-line" style="color:var(--brand-1000)" aria-hidden="true"></i>Személyes alkalom</h3><p>Budapest, Kéthly Anna tér 1., II. emelet, 261-es tárgyaló. A regisztráció a helyszínen 09:30-tól, a program 10:00-kor kezdődik; 11:10 és 11:40 között szünetet tartunk.</p></div>
+      <div class="tcard"><h3 style="display:flex;align-items:center;gap:10px"><i class="ri-computer-line" style="color:var(--brand-1000)" aria-hidden="true"></i>Online alkalom</h3><p>A csatlakozási linket és a technikai tudnivalókat a regisztrációt visszaigazoló e-mailben, valamint az esemény előtti napon küldjük ki.</p></div>
     </div>
   </div>
 </section>

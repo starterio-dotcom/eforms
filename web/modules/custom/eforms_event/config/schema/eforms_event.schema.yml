@@ -68,6 +68,9 @@ eforms_event.occasion:
     done_note:
       type: label
       label: 'Kiegészítés a visszaigazoláson'
+    done_mode:
+      type: label
+      label: 'Részvételi mód szövege a visszaigazoláson'
     cta_label:
       type: label
       label: 'CTA gomb felirata'

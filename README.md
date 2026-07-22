@@ -73,6 +73,9 @@ docker compose exec web vendor/bin/drush cr
   helyőrző mellé azonos néven `jpg`/`jpeg`/`png`/`webp` fájlt tenni
   (pl. `totka-tamas.jpg`) — a fotó automatikusan felülírja az SVG-t; utána
   `drush cr`.
+- **Sötét mód**: nincs — a DÁP Design System 1.5 világos témájú tokenkészletére
+  épül a felület, a designnal egyezően. A `prefers-reduced-motion` beállítást
+  a téma tiszteletben tartja (az átmenetek kikapcsolnak).
 - **Nyelv**: a felület szövegei magyarul, közvetlenül a modulban/sablonokban
   szerepelnek; a Drupal admin felülete angol marad (a magyar admin fordítás a
   `locale` modullal utólag telepíthető).

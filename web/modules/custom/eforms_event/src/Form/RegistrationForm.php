@@ -89,14 +89,18 @@ class RegistrationForm extends FormBase {
         . '<span class="dap-badge dap-badge--' . Html::escape($occasion['badge_type']) . '">' . Html::escape($occasion['badge_text']) . '</span>'
         . '</label>';
     }
+    $group_aria = ' role="radiogroup" aria-labelledby="eforms-esemeny-cim" aria-required="true"';
+    if (isset($errors['esemeny'])) {
+      $group_aria .= ' aria-invalid="true" aria-describedby="eforms-esemeny-error"';
+    }
     $form['fs_esemeny'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['fs']],
-      'title' => ['#markup' => '<h2 class="fs-h"><span class="num">1</span>Melyik alkalmon venne részt? *</h2>'],
-      'options' => ['#markup' => Markup::create('<div class="evsel">' . $cards . '</div>')],
+      'title' => ['#markup' => '<h2 class="fs-h" id="eforms-esemeny-cim"><span class="num">1</span>Melyik alkalmon venne részt? *</h2>'],
+      'options' => ['#markup' => Markup::create('<div class="evsel"' . $group_aria . '>' . $cards . '</div>')],
     ];
     if (isset($errors['esemeny'])) {
-      $form['fs_esemeny']['error'] = $this->feedback($errors['esemeny']);
+      $form['fs_esemeny']['error'] = $this->feedback($errors['esemeny'], 'eforms-esemeny-error');
     }
 
     $form['divider1'] = ['#markup' => '<hr class="dap-divider">'];
@@ -128,28 +132,37 @@ class RegistrationForm extends FormBase {
     ];
     if (isset($errors['nev'])) {
       $form['fs_adatok']['grid']['nev_wrap']['nev']['#attributes']['class'][] = 'error';
-      $form['fs_adatok']['grid']['nev_wrap']['nev_error'] = $this->feedback($errors['nev']);
+      $form['fs_adatok']['grid']['nev_wrap']['nev']['#attributes']['aria-invalid'] = 'true';
+      $form['fs_adatok']['grid']['nev_wrap']['nev']['#attributes']['aria-describedby'] = 'eforms-nev-error';
+      $form['fs_adatok']['grid']['nev_wrap']['nev_error'] = $this->feedback($errors['nev'], 'eforms-nev-error');
     }
 
     $form['fs_adatok']['grid']['email_wrap'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['err-wrap']],
     ];
+    // A súgót nem a core #description-nel rendereljük, mert az felülírná az
+    // aria-describedby-t — így hibánál a súgó és a hibaüzenet is kötve marad.
+    $email_describedby = 'eforms-email-helper' . (isset($errors['email']) ? ' eforms-email-error' : '');
     $form['fs_adatok']['grid']['email_wrap']['email'] = [
       '#type' => 'textfield',
       '#title' => 'E-mail-cím',
-      '#description' => 'Erre a címre küldjük a visszaigazolást.',
       '#maxlength' => 254,
       '#attributes' => [
         'placeholder' => 'nev@szervezet.hu',
         'autocomplete' => 'email',
         'inputmode' => 'email',
+        'aria-describedby' => $email_describedby,
       ],
       '#wrapper_attributes' => ['class' => ['dap-field--req']],
     ];
+    $form['fs_adatok']['grid']['email_wrap']['email_helper'] = [
+      '#markup' => Markup::create('<div class="dap-helper" id="eforms-email-helper">Erre a címre küldjük a visszaigazolást.</div>'),
+    ];
     if (isset($errors['email'])) {
       $form['fs_adatok']['grid']['email_wrap']['email']['#attributes']['class'][] = 'error';
-      $form['fs_adatok']['grid']['email_wrap']['email_error'] = $this->feedback($errors['email']);
+      $form['fs_adatok']['grid']['email_wrap']['email']['#attributes']['aria-invalid'] = 'true';
+      $form['fs_adatok']['grid']['email_wrap']['email_error'] = $this->feedback($errors['email'], 'eforms-email-error');
     }
 
     $form['fs_adatok']['grid']['telefon'] = [
@@ -182,13 +195,15 @@ class RegistrationForm extends FormBase {
     ];
     if (isset($errors['gdpr'])) {
       $form['fs_gdpr']['box']['gdpr']['#attributes']['class'][] = 'error';
+      $form['fs_gdpr']['box']['gdpr']['#attributes']['aria-invalid'] = 'true';
+      $form['fs_gdpr']['box']['gdpr']['#attributes']['aria-describedby'] = 'eforms-gdpr-error';
     }
     $privacy_url = Url::fromRoute('eforms_event.privacy')->toString();
     $form['fs_gdpr']['box']['note'] = [
       '#markup' => Markup::create('<p>A megadott adatokat kizárólag a rendezvény szervezésével összefüggésben, a regisztráció kezelése és a kapcsolattartás céljából kezeljük. Részletek az <a href="' . $privacy_url . '" target="_blank" rel="noopener">adatkezelési tájékoztatóban</a>.</p>'),
     ];
     if (isset($errors['gdpr'])) {
-      $form['fs_gdpr']['box']['gdpr_error'] = $this->feedback($errors['gdpr']);
+      $form['fs_gdpr']['box']['gdpr_error'] = $this->feedback($errors['gdpr'], 'eforms-gdpr-error');
     }
 
     // Küldés.
@@ -214,10 +229,11 @@ class RegistrationForm extends FormBase {
   /**
    * Mezőhiba a DÁP FeedbackMessage komponens markupjával.
    */
-  protected function feedback(string $message): array {
+  protected function feedback(string $message, string $id = ''): array {
     return [
       '#markup' => Markup::create(
-        '<span class="dap-feedback"><span class="dap-feedback__icon">!</span>' . Html::escape($message) . '</span>'
+        '<span class="dap-feedback"' . ($id !== '' ? ' id="' . Html::escape($id) . '"' : '') . '>'
+        . '<span class="dap-feedback__icon" aria-hidden="true">!</span>' . Html::escape($message) . '</span>'
       ),
     ];
   }
@@ -281,7 +297,7 @@ class RegistrationForm extends FormBase {
         'nev' => $nev,
         'date_label' => $occasion['date_label'],
         'time_label' => $occasion['time_label'],
-        'mode' => $occasion['label'] . ' — ' . $occasion['detail'],
+        'mode' => $occasion['done_mode'] ?? ($occasion['label'] . ' — ' . $occasion['detail']),
         'contact_email' => $this->configFactory()->get('eforms_event.settings')->get('contact_email'),
       ]);
     }

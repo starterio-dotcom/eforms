@@ -14,6 +14,7 @@
           attribution: '© OpenStreetMap contributors'
         }).addTo(map);
         L.marker(pos, {
+          title: 'Kéthly Anna tér 1. — a rendezvény helyszíne',
           icon: L.divIcon({ className: '', html: '<div class="venue-pin"></div>', iconSize: [18, 18], iconAnchor: [9, 9] })
         })
           .addTo(map)

@@ -127,7 +127,7 @@ class EventController extends ControllerBase {
         'nev' => $reg['nev'] ?: 'kedves Résztvevő',
         'email' => $reg['email'],
         'date_label' => $occasion['date_label'],
-        'mode' => $occasion['label'] . ' — ' . $occasion['detail'],
+        'mode' => $occasion['done_mode'] ?? ($occasion['label'] . ' — ' . $occasion['detail']),
         'time_label' => $occasion['time_label'],
         'note' => $occasion['done_note'] ?? '',
       ],

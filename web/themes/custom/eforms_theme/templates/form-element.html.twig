@@ -31,7 +31,7 @@
     {{ label }}
   {% endif %}
   {% if description.content %}
-    <div class="dap-helper">{{ description.content }}</div>
+    <div{{ description.attributes.addClass('dap-helper') }}>{{ description.content }}</div>
   {% endif %}
   {% if errors %}
     <span class="dap-feedback"><span class="dap-feedback__icon">!</span>{{ errors }}</span>
