@@ -77,6 +77,11 @@ class Registration extends ContentEntityBase {
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Beküldve'));
 
+    $fields['teams_invite_sent'] = BaseFieldDefinition::create('timestamp')
+      ->setLabel(t('Teams-meghívó kiküldve'))
+      ->setDefaultValue(0)
+      ->setInitialValue(0);
+
     return $fields;
   }
 

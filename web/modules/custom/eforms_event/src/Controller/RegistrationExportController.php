@@ -26,8 +26,9 @@ class RegistrationExportController extends ControllerBase {
     $date_formatter = \Drupal::service('date.formatter');
 
     $handle = fopen('php://temp', 'r+');
-    fputcsv($handle, ['Azonosító', 'Teljes név', 'E-mail-cím', 'Telefonszám', 'Alkalom', 'Adatkezelés elfogadva', 'Beküldve'], ';');
+    fputcsv($handle, ['Azonosító', 'Teljes név', 'E-mail-cím', 'Telefonszám', 'Alkalom', 'Adatkezelés elfogadva', 'Beküldve', 'Teams-meghívó kiküldve'], ';');
     foreach ($storage->loadMultiple($ids) as $registration) {
+      $teams_sent = (int) $registration->get('teams_invite_sent')->value;
       fputcsv($handle, [
         $registration->id(),
         $this->sanitizeCell((string) $registration->get('name')->value),
@@ -36,6 +37,9 @@ class RegistrationExportController extends ControllerBase {
         $occasions[$registration->get('occasion')->value] ?? $registration->get('occasion')->value,
         $registration->get('gdpr')->value ? 'igen' : 'nem',
         $date_formatter->format((int) $registration->get('created')->value, 'custom', 'Y-m-d H:i:s'),
+        $registration->get('occasion')->value !== 'online'
+          ? ''
+          : ($teams_sent > 0 ? $date_formatter->format($teams_sent, 'custom', 'Y-m-d H:i:s') : 'függőben'),
       ], ';');
     }
     rewind($handle);

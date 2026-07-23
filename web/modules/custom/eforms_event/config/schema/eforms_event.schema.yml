@@ -8,6 +8,9 @@ eforms_event.settings:
     registration_deadline:
       type: string
       label: 'Regisztrációs határidő (Y-m-d\TH:i:s, site időzónában; üres = nincs)'
+    teams_link:
+      type: string
+      label: 'Microsoft Teams értekezlet csatlakozási linkje'
     emails:
       type: mapping
       label: 'Visszaigazoló levelek'
@@ -15,6 +18,8 @@ eforms_event.settings:
         szemelyes:
           type: eforms_event.email_template
         online:
+          type: eforms_event.email_template
+        teams:
           type: eforms_event.email_template
     occasions:
       type: mapping

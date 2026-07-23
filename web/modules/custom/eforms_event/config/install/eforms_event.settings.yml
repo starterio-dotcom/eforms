@@ -1,5 +1,6 @@
 contact_email: 'ekroktatas@ujvilag.gov.hu'
 registration_deadline: '2026-08-10T23:59:59'
+teams_link: ''
 emails:
   szemelyes:
     subject: 'Szakmai tájékoztató nap jelentkezés megerősítve'
@@ -18,6 +19,36 @@ emails:
       A helyszínen parkolás biztosítása nem megoldható, ennek okán kérjük, hogy a parkolási lehetőségekről a szakmai tájékoztató napot megelőzően szíveskedjen tájékozódni.
 
       A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+  teams:
+    subject: 'Microsoft Teams meghívó és csatlakozási segédlet — szakmai tájékoztató nap'
+    body: |
+      Tisztelt @nev!
+
+      Ezzel az üzenettel küldjük „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” szakmai tájékoztató nap (@datum) Microsoft Teams csatlakozási linkjét és a csatlakozási segédletet.
+
+      Az értekezlethez az alábbi linkre kattintva tud csatlakozni:
+      @link
+
+      MICROSOFT TEAMS CSATLAKOZÁSI SEGÉDLET
+
+      Támogatott böngészőkben (pl. Google Chrome, Microsoft Edge) az alábbi lehetőségek közül választhat:
+      – Amennyiben böngészőből szeretne részt venni, kattintson a „Folytatás ebben a böngészőben” lehetőségre.
+      – Amennyiben a Teams alkalmazásban szeretne részt venni, és az telepítve van számítógépén, kattintson az „A Teams app megnyitása” lehetőségre.
+      – Amennyiben a Teams alkalmazásban szeretne részt venni, de az nincs telepítve számítógépén, kattintson az „A Windowshoz készült app letöltése” lehetőségre.
+
+      Mozilla Firefoxban és egyéb, nem támogatott böngészőben:
+      – Böngészős részvételhez kattintson az „A Teams használata a Microsoft Edge böngészőben” lehetőségre; a Teams alkalmazás megnyitása vagy letöltése itt is elérhető.
+
+      Böngészőben való folytatás esetén a Teams engedélyt fog kérni a webkamera és a mikrofon használatához. A szakmai tájékoztató napon nincs lehetőség ezek használatára, így kattinthat az „Engedélyezés” vagy a „Letiltás” lehetőségre is. Amennyiben a „Letiltás” opciót választotta, a megjelenő figyelmeztetésnél kattintson a „Folytatás hang és videokép nélkül” gombra.
+
+      Belépés előtt kérjük, írja be a „Név megadása” (a Teams alkalmazásban: „Enter Name”) mezőbe a teljes nevét, valamint győződjön meg arról, hogy a mező alatti kamera- és mikrofonikonok át vannak húzva — állapotukat a mellettük lévő kapcsolókkal tudja módosítani. Ezután kattintson a „Csatlakozás” („Join now”) gombra.
+
+      Kérjük, várjon türelemmel, míg kollégáink beengedik Önt a szakmai tájékoztató napra! Felhívjuk figyelmét: amennyiben nem a jelentkezéskor megadott névvel próbál csatlakozni, kollégáink nem tudják Önt beengedni.
+
+      Kérdés esetén: @kapcsolat
 
       Üdvözlettel:
       Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés

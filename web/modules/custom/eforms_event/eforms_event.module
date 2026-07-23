@@ -85,6 +85,10 @@ function eforms_event_cron(): void {
     \Drupal::state()->set('eforms_event.reg_open', $open);
     \Drupal\Core\Cache\Cache::invalidateTags(['config:eforms_event.settings']);
   }
+
+  // Függőben maradt Teams-meghívók kiküldése (pl. ha a link a regisztrációk
+  // beérkezése után lett beállítva, vagy egy korábbi küldés meghiúsult).
+  \Drupal::service('eforms_event.teams_invite')->sendPending();
 }
 
 /**
@@ -95,15 +99,16 @@ function eforms_event_cron(): void {
  * @nev, @datum, @kapcsolat, @menetrend.
  */
 function eforms_event_mail(string $key, array &$message, array $params): void {
-  if ($key !== 'confirmation') {
+  if (!in_array($key, ['confirmation', 'teams_invite'], TRUE)) {
     return;
   }
   $config = \Drupal::config('eforms_event.settings');
-  $template = $config->get('emails.' . ($params['occasion'] ?? ''));
+  $template = $config->get('emails.' . ($key === 'teams_invite' ? 'teams' : ($params['occasion'] ?? '')));
 
   $replacements = [
     '@nev' => $params['nev'] ?? '',
     '@datum' => $params['date_label'] ?? '',
+    '@link' => $params['link'] ?? '',
     '@kapcsolat' => $config->get('contact_email') ?: '',
     '@menetrend' => \Drupal\Core\Url::fromRoute('eforms_event.page', [], ['absolute' => TRUE])->toString(),
   ];

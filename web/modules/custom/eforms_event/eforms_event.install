@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Az eforms_event modul telepítési és frissítési hookjai.
+ */
+
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * A teams_invite_sent mező telepítése a regisztráció entitásra.
+ */
+function eforms_event_update_10001(): string {
+  $field = BaseFieldDefinition::create('timestamp')
+    ->setLabel(t('Teams-meghívó kiküldve'))
+    ->setDefaultValue(0)
+    ->setInitialValue(0);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('teams_invite_sent', 'eforms_registration', 'eforms_event', $field);
+  return 'A teams_invite_sent mező telepítve az eforms_registration entitásra.';
+}

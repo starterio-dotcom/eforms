@@ -68,6 +68,11 @@ docker compose exec web vendor/bin/drush cr
 - **Kapacitás**: szabad helyek = kapacitás − (induló foglaltság + beérkezett
   regisztrációk). Az induló foglaltság (41/50, 37/100 — a designnal egyezően) a
   `eforms_event.settings` konfigban módosítható.
+- **Teams-meghívó**: az online regisztrálók a visszaigazolás mellé automatikusan
+  megkapják a Microsoft Teams meghívót és csatlakozási segédletet, amint a
+  Teams-link be van állítva az admin **Kapacitások** fülön. A link beállítása
+  előtt beérkezett regisztrációk „függőben” állapotba kerülnek, és a link
+  mentésekor (vagy cronból) automatikusan megkapják a meghívót.
 - **Előadói fotók**: az Előadók szekcióban helyőrző SVG-k vannak
   (`web/modules/custom/eforms_event/images/eloadok/`). Valódi fotóhoz elég a
   helyőrző mellé azonos néven `jpg`/`jpeg`/`png`/`webp` fájlt tenni

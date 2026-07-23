@@ -8,6 +8,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\eforms_event\Service\Capacity;
+use Drupal\eforms_event\Service\TeamsInvite;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -16,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class CapacitySettingsForm extends ConfigFormBase {
 
   protected Capacity $capacity;
+  protected TeamsInvite $teamsInvite;
 
   /**
    * {@inheritdoc}
@@ -23,6 +25,7 @@ class CapacitySettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container): static {
     $instance = parent::create($container);
     $instance->capacity = $container->get('eforms_event.capacity');
+    $instance->teamsInvite = $container->get('eforms_event.teams_invite');
     return $instance;
   }
 
@@ -67,6 +70,27 @@ class CapacitySettingsForm extends ConfigFormBase {
       '#title' => 'Határidő',
       '#default_value' => $deadline_raw !== '' ? new DrupalDateTime($deadline_raw) : NULL,
       '#description' => 'Eddig az időpontig lehet regisztrálni; utána a regisztráció automatikusan lezár minden felületen. Üresen hagyva a regisztráció nyitva marad.',
+    ];
+
+    // Microsoft Teams meghívó (online alkalom).
+    $teams_link = (string) $this->config('eforms_event.settings')->get('teams_link');
+    $pending = $this->teamsInvite->pendingCount();
+    $form['teams'] = [
+      '#type' => 'details',
+      '#title' => 'Microsoft Teams meghívó (online alkalom)',
+      '#open' => TRUE,
+    ];
+    $form['teams']['allapot'] = [
+      '#markup' => '<p>' . ($teams_link === ''
+        ? '<strong>Nincs Teams-link beállítva.</strong>' . ($pending ? ' Jelenleg ' . $pending . ' online regisztráció vár meghívóra — a link mentésekor automatikusan kiküldjük.' : '')
+        : '<strong>Teams-link beállítva.</strong>' . ($pending ? ' Függőben lévő meghívók: ' . $pending . ' (mentéskor kiküldjük).' : ' Minden online regisztráció megkapta a meghívót; az új regisztrációk beküldéskor automatikusan kapják.')) . '</p>',
+    ];
+    $form['teams']['teams_link'] = [
+      '#type' => 'url',
+      '#title' => 'Teams értekezlet csatlakozási linkje',
+      '#default_value' => $teams_link,
+      '#maxlength' => 2048,
+      '#description' => 'A Microsoft Teams értekezlet meghívólinkje. Amíg üres, a meghívók nem mennek ki; beállítás után az új online regisztrációk azonnal, a korábbiak a mentéskor kapják meg a meghívót és a csatlakozási segédletet.',
     ];
 
     foreach ($occasions as $key => $occasion) {
@@ -129,10 +153,17 @@ class CapacitySettingsForm extends ConfigFormBase {
     }
     $deadline = $form_state->getValue('registration_deadline');
     $config->set('registration_deadline', $deadline instanceof DrupalDateTime ? $deadline->format('Y-m-d\TH:i:s') : '');
+    $config->set('teams_link', trim((string) $form_state->getValue('teams_link')));
     $config->save();
     // A nyitva/lezárva állapotjelző szinkronban tartása a cron-logikával.
     \Drupal::state()->set('eforms_event.reg_open', $this->capacity->isOpen());
     $this->messenger()->addStatus('A beállítások mentve. A nyilvános oldalak azonnal frissültek.');
+
+    // Függőben lévő Teams-meghívók kiküldése az újonnan mentett linkkel.
+    $sent = $this->teamsInvite->sendPending();
+    if ($sent > 0) {
+      $this->messenger()->addStatus($sent . ' Teams-meghívót kiküldtünk a korábbi online regisztrálóknak.');
+    }
   }
 
 }

@@ -2,3 +2,6 @@ services:
   eforms_event.capacity:
     class: Drupal\eforms_event\Service\Capacity
     arguments: ['@entity_type.manager', '@config.factory']
+  eforms_event.teams_invite:
+    class: Drupal\eforms_event\Service\TeamsInvite
+    arguments: ['@entity_type.manager', '@config.factory', '@plugin.manager.mail']

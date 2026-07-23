@@ -22,6 +22,7 @@ class RegistrationListBuilder extends EntityListBuilder {
       'phone' => $this->t('Telefonszám'),
       'occasion' => $this->t('Alkalom'),
       'created' => $this->t('Beküldve'),
+      'teams' => $this->t('Teams-meghívó'),
     ];
     return $header + parent::buildHeader();
   }
@@ -35,12 +36,16 @@ class RegistrationListBuilder extends EntityListBuilder {
       'szemelyes' => 'Személyes részvétel',
       'online' => 'Online részvétel',
     ];
+    $teams_sent = (int) $entity->get('teams_invite_sent')->value;
     $row = [
       'name' => $entity->get('name')->value,
       'email' => $entity->get('email')->value,
       'phone' => $entity->get('phone')->value ?: '—',
       'occasion' => $occasions[$entity->get('occasion')->value] ?? $entity->get('occasion')->value,
       'created' => \Drupal::service('date.formatter')->format((int) $entity->get('created')->value, 'short'),
+      'teams' => $entity->get('occasion')->value !== 'online'
+        ? '—'
+        : ($teams_sent > 0 ? \Drupal::service('date.formatter')->format($teams_sent, 'short') : 'függőben'),
     ];
     return $row + parent::buildRow($entity);
   }

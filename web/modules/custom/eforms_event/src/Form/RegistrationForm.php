@@ -13,6 +13,7 @@ use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\Core\Url;
 use Drupal\eforms_event\Entity\Registration;
 use Drupal\eforms_event\Service\Capacity;
+use Drupal\eforms_event\Service\TeamsInvite;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -28,6 +29,7 @@ class RegistrationForm extends FormBase {
     protected Capacity $capacity,
     protected PrivateTempStoreFactory $tempStoreFactory,
     protected MailManagerInterface $mailManager,
+    protected TeamsInvite $teamsInvite,
   ) {}
 
   /**
@@ -38,6 +40,7 @@ class RegistrationForm extends FormBase {
       $container->get('eforms_event.capacity'),
       $container->get('tempstore.private'),
       $container->get('plugin.manager.mail'),
+      $container->get('eforms_event.teams_invite'),
     );
   }
 
@@ -323,6 +326,12 @@ class RegistrationForm extends FormBase {
     }
     catch (\Throwable $e) {
       \Drupal::logger('eforms_event')->error('A visszaigazoló e-mail küldése nem sikerült: @error', ['@error' => $e->getMessage()]);
+    }
+
+    // Online regisztrációnál a Teams-meghívó automatikus kiküldése (ha a
+    // link már be van állítva; egyébként a link mentésekor / cronból megy).
+    if ($esemeny === 'online') {
+      $this->teamsInvite->sendFor($registration);
     }
 
     $this->tempStoreFactory->get('eforms_event')->set('done', [
