@@ -92,12 +92,12 @@ footer { background: var(--indigo-1100); color: #fff; margin-top: 64px; }
 .evopt { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 12px; border: 1.5px solid var(--border-neutral-subtle); cursor: pointer; background: var(--white-100); transition: border-color .12s ease, background .12s ease; }
 .evopt:hover { border-color: var(--brand-1000); }
 .evopt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-.evopt.sel, .evopt:has(input[type="radio"]:checked) { border-color: var(--brand-1000); background: var(--brand-100); }
+.evopt:has(input[type="radio"]:checked) { border-color: var(--brand-1000); background: var(--brand-100); }
 .evopt-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .evopt b { font-weight: 700; font-size: 15px; color: var(--text-neutral-strong); }
 .evopt .d { font-size: 13px; color: var(--text-neutral-subtle); line-height: 1.5; }
 .radio-dot { width: 20px; height: 20px; border-radius: 1000px; border: 2px solid var(--border-neutral-medium); box-sizing: border-box; flex: none; margin-top: 1px; background: var(--white-100); }
-.evopt.sel .radio-dot, .evopt:has(input[type="radio"]:checked) .radio-dot { border: 6px solid var(--brand-1000); background: #fff; }
+.evopt:has(input[type="radio"]:checked) .radio-dot { border: 6px solid var(--brand-1000); background: #fff; }
 .evopt:has(input[type="radio"]:focus-visible) { outline: 2px solid var(--brand-1000); outline-offset: 2px; }
 .evopt--disabled { opacity: .6; cursor: not-allowed; }
 .evopt--disabled:hover { border-color: var(--border-neutral-subtle); }

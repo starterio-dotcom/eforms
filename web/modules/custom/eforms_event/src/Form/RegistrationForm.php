@@ -82,7 +82,11 @@ class RegistrationForm extends FormBase {
     foreach ($occasions as $key => $occasion) {
       $is_selected = $selected === $key;
       $disabled = empty($occasion['selectable']);
-      $cards .= '<label class="evopt' . ($is_selected ? ' sel' : '') . ($disabled ? ' evopt--disabled' : '') . '">'
+      // A kijelölt állapotot kizárólag a rádió checked állapota vezérli
+      // (CSS :has) — külön .sel osztály nincs, mert az átkattintás után
+      // a szerver-renderelt osztály ottragadna, és két kártya látszana
+      // kijelöltnek.
+      $cards .= '<label class="evopt' . ($disabled ? ' evopt--disabled' : '') . '">'
         . '<input type="radio" name="esemeny" value="' . Html::escape($key) . '"'
         . ($is_selected ? ' checked="checked"' : '')
         . ($disabled ? ' disabled="disabled"' : '')
