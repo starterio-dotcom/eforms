@@ -3,3 +3,15 @@ eforms_event.registrations_tab:
   route_name: entity.eforms_registration.collection
   base_route: system.admin_content
   weight: 20
+
+eforms_event.registrations_list_sub:
+  title: 'Lista'
+  route_name: entity.eforms_registration.collection
+  parent_id: eforms_event.registrations_tab
+  weight: 0
+
+eforms_event.capacity_sub:
+  title: 'Kapacitások'
+  route_name: eforms_event.capacity_settings
+  parent_id: eforms_event.registrations_tab
+  weight: 10

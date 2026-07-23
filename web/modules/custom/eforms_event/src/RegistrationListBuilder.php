@@ -51,6 +51,23 @@ class RegistrationListBuilder extends EntityListBuilder {
   public function render(): array {
     $build = parent::render();
     $build['table']['#empty'] = $this->t('Még nem érkezett regisztráció.');
+
+    // Foglaltsági összegző a lista fölé.
+    $summary_items = [];
+    foreach (\Drupal::service('eforms_event.capacity')->getOccasions() as $occasion) {
+      $summary_items[] = '<strong>' . $occasion['label'] . ':</strong> '
+        . $occasion['taken'] . ' / ' . $occasion['capacity'] . ' foglalt'
+        . ' (regisztráció: ' . $occasion['registered'] . ', induló: ' . $occasion['base_taken'] . ')'
+        . ' · szabad: <strong>' . $occasion['free'] . '</strong>'
+        . ($occasion['full'] ? ' — BETELT' : '');
+    }
+    $build['capacity_summary'] = [
+      '#markup' => '<p>' . implode('<br>', $summary_items) . '</p>',
+      '#weight' => -10,
+      '#cache' => [
+        'tags' => ['eforms_registration_list', 'config:eforms_event.settings'],
+      ],
+    ];
     return $build;
   }
 

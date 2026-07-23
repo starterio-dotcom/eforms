@@ -45,3 +45,11 @@ eforms_event.export:
     _title: 'Regisztrációk exportálása'
   requirements:
     _permission: 'administer eforms registrations'
+
+eforms_event.capacity_settings:
+  path: '/admin/content/eforms-registrations/kapacitasok'
+  defaults:
+    _form: '\Drupal\eforms_event\Form\CapacitySettingsForm'
+    _title: 'Kapacitások'
+  requirements:
+    _permission: 'administer eforms registrations'

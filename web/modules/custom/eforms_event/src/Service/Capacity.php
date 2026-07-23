@@ -55,6 +55,7 @@ class Capacity {
       $result[$key] = $occasion + [
         'taken' => $taken,
         'free' => $free,
+        'registered' => $count,
         'full' => $free === 0,
         'badge_type' => $badge_type,
         'badge_text' => $badge_text,
