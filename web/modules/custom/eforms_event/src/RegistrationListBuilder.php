@@ -23,6 +23,7 @@ class RegistrationListBuilder extends EntityListBuilder {
       'occasion' => $this->t('Alkalom'),
       'created' => $this->t('Beküldve'),
       'teams' => $this->t('Teams-meghívó'),
+      'reminder' => $this->t('Emlékeztető'),
     ];
     return $header + parent::buildHeader();
   }
@@ -46,6 +47,9 @@ class RegistrationListBuilder extends EntityListBuilder {
       'teams' => $entity->get('occasion')->value !== 'online'
         ? '—'
         : ($teams_sent > 0 ? \Drupal::service('date.formatter')->format($teams_sent, 'short') : 'függőben'),
+      'reminder' => ((int) $entity->get('reminder_sent')->value) > 0
+        ? \Drupal::service('date.formatter')->format((int) $entity->get('reminder_sent')->value, 'short')
+        : '—',
     ];
     return $row + parent::buildRow($entity);
   }

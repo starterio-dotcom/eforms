@@ -5,3 +5,6 @@ services:
   eforms_event.teams_invite:
     class: Drupal\eforms_event\Service\TeamsInvite
     arguments: ['@entity_type.manager', '@config.factory', '@plugin.manager.mail']
+  eforms_event.reminder:
+    class: Drupal\eforms_event\Service\Reminder
+    arguments: ['@entity_type.manager', '@config.factory', '@plugin.manager.mail']

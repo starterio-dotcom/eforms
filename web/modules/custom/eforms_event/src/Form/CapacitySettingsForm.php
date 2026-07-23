@@ -93,6 +93,25 @@ class CapacitySettingsForm extends ConfigFormBase {
       '#description' => 'A Microsoft Teams értekezlet meghívólinkje. Amíg üres, a meghívók nem mennek ki; beállítás után az új online regisztrációk azonnal, a korábbiak a mentéskor kapják meg a meghívót és a csatlakozási segédletet.',
     ];
 
+    // Emlékeztető e-mailek állapota.
+    $reminder_status = \Drupal::service('eforms_event.reminder')->getStatus();
+    $occasion_labels = ['szemelyes' => 'Személyes részvétel', 'online' => 'Online részvétel'];
+    $lines = [];
+    foreach ($reminder_status as $key => $info) {
+      $lines[] = '<strong>' . ($occasion_labels[$key] ?? $key) . ':</strong> emlékeztető napja '
+        . ($info['reminder_day'] ?: 'nincs dátum beállítva')
+        . ' · kiküldve: ' . $info['sent'] . ' / ' . $info['total']
+        . ($info['active'] ? ' · <strong>az ablak most aktív</strong>' : '');
+    }
+    $form['reminder'] = [
+      '#type' => 'details',
+      '#title' => 'Emlékeztető e-mailek',
+      '#open' => TRUE,
+    ];
+    $form['reminder']['allapot'] = [
+      '#markup' => '<p>Az emlékeztetőt a rendszer automatikusan (cronból) küldi az esemény előtti napon minden regisztrálónak.</p><p>' . implode('<br>', $lines) . '</p>',
+    ];
+
     foreach ($occasions as $key => $occasion) {
       $form[$key] = [
         '#type' => 'details',

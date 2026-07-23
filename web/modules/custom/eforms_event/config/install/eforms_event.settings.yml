@@ -52,6 +52,36 @@ emails:
 
       Üdvözlettel:
       Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+  emlekezteto_szemelyes:
+    subject: 'Emlékeztető — szakmai tájékoztató nap holnap'
+    body: |
+      Tisztelt @nev!
+
+      Emlékeztetjük, hogy „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” szakmai tájékoztató nap, amelyre személyes részvétellel regisztrált, holnap, @datum kerül megrendezésre.
+
+      Helyszín: 1077 Budapest, Kéthly Anna tér 1. (Myhive Greenpoint 7 irodaház), II. emelet, 261-es tárgyaló. Az irodaházat kérjük a Klauzál utcai bejárat felől megközelíteni; a tárgyaló a Klauzál utca felőli oldalon található liftekkel érhető el.
+
+      A program 10:00 órakor kezdődik; kérjük, hogy a helyszíni regisztrációhoz 09:30 és 10:00 óra között érkezzen meg. A helyszínen parkolás biztosítása nem megoldható, ezért kérjük, előzetesen tájékozódjon a parkolási lehetőségekről.
+
+      A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Amennyiben mégsem tud részt venni, kérjük, jelezze a @kapcsolat címen.
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+  emlekezteto_online:
+    subject: 'Emlékeztető — szakmai tájékoztató nap holnap (online)'
+    body: |
+      Tisztelt @nev!
+
+      Emlékeztetjük, hogy „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” szakmai tájékoztató nap, amelyre online részvétellel regisztrált, holnap, @datum kerül megrendezésre. A program 10:00 órakor kezdődik.
+
+      A Microsoft Teams csatlakozási linket és a csatlakozási segédletet külön üzenetben küldtük, illetve küldjük ki — legkésőbb a tájékoztató nap reggelén, 08:00 óráig. Amennyiben nem találja, ellenőrizze a levélszemét mappát is, vagy jelezze részünkre a @kapcsolat címen, illetve a +36 1 465-8899 telefonszámon.
+
+      A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
   online:
     subject: 'Szakmai tájékoztató nap jelentkezés megerősítve'
     body: |
@@ -73,6 +103,7 @@ emails:
 occasions:
   szemelyes:
     label: 'Személyes részvétel'
+    date: '2026-08-12'
     date_label: '2026. augusztus 12., szerda'
     day: '12'
     month: 'aug'
@@ -96,6 +127,7 @@ occasions:
         text: 'Legfeljebb 50 fő'
   online:
     label: 'Online részvétel'
+    date: '2026-08-13'
     date_label: '2026. augusztus 13., csütörtök'
     day: '13'
     month: 'aug'

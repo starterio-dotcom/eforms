@@ -73,6 +73,12 @@ docker compose exec web vendor/bin/drush cr
   Teams-link be van állítva az admin **Kapacitások** fülön. A link beállítása
   előtt beérkezett regisztrációk „függőben” állapotba kerülnek, és a link
   mentésekor (vagy cronból) automatikusan megkapják a meghívót.
+- **Emlékeztető**: az esemény előtti napon a rendszer (cronból) minden
+  regisztrálónak alkalom-specifikus emlékeztető e-mailt küld. Az időzítés az
+  `occasions.*.date` (ISO dátum) konfigkulcsokon alapul, a küldési ablak az
+  előző nap 0:00-tól az esemény napján 10:00-ig tart; a kiküldés tényét a
+  rendszer regisztrációnként jelöli, így duplázás nincs. A cron futtatásáról
+  az automated_cron gondoskodik (forgalom hiányában: `drush cron`).
 - **Előadói fotók**: az Előadók szekcióban helyőrző SVG-k vannak
   (`web/modules/custom/eforms_event/images/eloadok/`). Valódi fotóhoz elég a
   helyőrző mellé azonos néven `jpg`/`jpeg`/`png`/`webp` fájlt tenni

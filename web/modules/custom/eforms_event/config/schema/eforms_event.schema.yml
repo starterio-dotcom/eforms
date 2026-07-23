@@ -21,6 +21,10 @@ eforms_event.settings:
           type: eforms_event.email_template
         teams:
           type: eforms_event.email_template
+        emlekezteto_szemelyes:
+          type: eforms_event.email_template
+        emlekezteto_online:
+          type: eforms_event.email_template
     occasions:
       type: mapping
       label: 'Alkalmak'
@@ -71,6 +75,9 @@ eforms_event.occasion:
     label:
       type: label
       label: 'Megnevezés'
+    date:
+      type: string
+      label: 'Az alkalom napja (ISO, Y-m-d) — az emlékeztető időzítéséhez'
     date_label:
       type: label
       label: 'Dátum felirat'

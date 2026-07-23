@@ -82,6 +82,11 @@ class Registration extends ContentEntityBase {
       ->setDefaultValue(0)
       ->setInitialValue(0);
 
+    $fields['reminder_sent'] = BaseFieldDefinition::create('timestamp')
+      ->setLabel(t('Emlékeztető kiküldve'))
+      ->setDefaultValue(0)
+      ->setInitialValue(0);
+
     return $fields;
   }
 
