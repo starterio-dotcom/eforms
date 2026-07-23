@@ -91,7 +91,7 @@ class EventController extends ControllerBase {
         ],
         [
           'name' => 'dr. Poroszkai-German Gabriella',
-          'lines' => ['EKR termékfelelős · TIGRA Zrt.'],
+          'lines' => ['felelős akkreditált közbeszerzési szaktanácsadó,', 'fejlesztő oldali EKR termékfelelős · TIGRA Zrt.'],
           'image' => $this->speakerImage('poroszkai-german-gabriella'),
         ],
       ],
