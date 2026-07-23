@@ -24,7 +24,7 @@ class RegistrationListBuilder extends EntityListBuilder {
       'created' => $this->t('Beküldve'),
       'teams' => $this->t('Teams-meghívó'),
       'reminder' => $this->t('Emlékeztető'),
-      'photo' => $this->t('Fotó (készítés / közzététel)'),
+      'audio' => $this->t('Hangfelvétel'),
       'note' => $this->t('Megjegyzés'),
     ];
     return $header + parent::buildHeader();
@@ -52,9 +52,9 @@ class RegistrationListBuilder extends EntityListBuilder {
       'reminder' => ((int) $entity->get('reminder_sent')->value) > 0
         ? \Drupal::service('date.formatter')->format((int) $entity->get('reminder_sent')->value, 'short')
         : '—',
-      'photo' => $entity->get('occasion')->value !== 'szemelyes'
+      'audio' => $entity->get('occasion')->value !== 'online'
         ? '—'
-        : (($entity->get('photo_consent')->value ? 'igen' : 'nem') . ' / ' . ($entity->get('photo_publish_consent')->value ? 'igen' : 'nem')),
+        : ($entity->get('audio_consent')->value ? 'igen' : 'nem'),
       'note' => ($note = (string) $entity->get('admin_note')->value) === ''
         ? '—'
         : (mb_strlen($note) > 40 ? mb_substr($note, 0, 40) . '…' : $note),

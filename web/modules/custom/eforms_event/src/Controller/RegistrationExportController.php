@@ -26,7 +26,7 @@ class RegistrationExportController extends ControllerBase {
     $date_formatter = \Drupal::service('date.formatter');
 
     $handle = fopen('php://temp', 'r+');
-    fputcsv($handle, ['Azonosító', 'Teljes név', 'E-mail-cím', 'Telefonszám', 'Alkalom', 'Adatkezelés elfogadva', 'Fotó készítéséhez hozzájárult', 'Fotó közzétételéhez hozzájárult', 'Beküldve', 'Teams-meghívó kiküldve', 'Emlékeztető kiküldve', 'Megjegyzés'], ';');
+    fputcsv($handle, ['Azonosító', 'Teljes név', 'E-mail-cím', 'Telefonszám', 'Alkalom', 'Adatkezelés elfogadva', 'Hangfelvételhez hozzájárult', 'Beküldve', 'Teams-meghívó kiküldve', 'Emlékeztető kiküldve', 'Megjegyzés'], ';');
     foreach ($storage->loadMultiple($ids) as $registration) {
       $teams_sent = (int) $registration->get('teams_invite_sent')->value;
       $reminder_sent = (int) $registration->get('reminder_sent')->value;
@@ -37,8 +37,7 @@ class RegistrationExportController extends ControllerBase {
         $this->sanitizeCell((string) $registration->get('phone')->value),
         $occasions[$registration->get('occasion')->value] ?? $registration->get('occasion')->value,
         $registration->get('gdpr')->value ? 'igen' : 'nem',
-        $registration->get('occasion')->value !== 'szemelyes' ? '' : ($registration->get('photo_consent')->value ? 'igen' : 'nem'),
-        $registration->get('occasion')->value !== 'szemelyes' ? '' : ($registration->get('photo_publish_consent')->value ? 'igen' : 'nem'),
+        $registration->get('occasion')->value !== 'online' ? '' : ($registration->get('audio_consent')->value ? 'igen' : 'nem'),
         $date_formatter->format((int) $registration->get('created')->value, 'custom', 'Y-m-d H:i:s'),
         $registration->get('occasion')->value !== 'online'
           ? ''

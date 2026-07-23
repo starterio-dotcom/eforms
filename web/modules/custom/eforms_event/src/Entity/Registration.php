@@ -103,6 +103,11 @@ class Registration extends ContentEntityBase {
       ->setDefaultValue(FALSE)
       ->setInitialValue(FALSE);
 
+    $fields['audio_consent'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Hozzájárult a hangfelvételhez'))
+      ->setDefaultValue(FALSE)
+      ->setInitialValue(FALSE);
+
     $fields['admin_note'] = BaseFieldDefinition::create('string_long')
       ->setLabel(t('Megjegyzés'))
       ->setDescription(t('Belső, adminisztrátori megjegyzés — a regisztráló nem látja.'))

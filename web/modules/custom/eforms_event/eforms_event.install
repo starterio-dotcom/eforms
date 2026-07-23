@@ -52,6 +52,19 @@ function eforms_event_update_10004(): string {
 }
 
 /**
+ * Hang-hozzájárulás mező telepítése (online alkalom GDPR).
+ */
+function eforms_event_update_10006(): string {
+  $field = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Hozzájárult a hangfelvételhez'))
+    ->setDefaultValue(FALSE)
+    ->setInitialValue(FALSE);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('audio_consent', 'eforms_registration', 'eforms_event', $field);
+  return 'Az audio_consent mező telepítve.';
+}
+
+/**
  * Adminisztrátori megjegyzés-mező telepítése.
  */
 function eforms_event_update_10005(): string {

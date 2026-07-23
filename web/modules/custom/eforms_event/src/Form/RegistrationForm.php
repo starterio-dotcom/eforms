@@ -215,30 +215,23 @@ class RegistrationForm extends FormBase {
       $form['fs_gdpr']['box']['gdpr_error'] = $this->feedback($errors['gdpr'], 'eforms-gdpr-error');
     }
 
-    // Alkalomfüggő adatkezelési blokkok — a CSS :has() mutatja a kiválasztott
-    // alkalomhoz tartozót, szerveroldalon pedig csak a releváns érték tárolódik.
+    // Alkalomfüggő adatkezelési blokk — csak az online ághoz van külön
+    // hozzájárulás (hangfelvétel). A CSS :has() mutatja a kiválasztott
+    // alkalomhoz tartozót; szerveroldalon csak a releváns érték tárolódik.
     $contact = (string) $this->configFactory()->get('eforms_event.settings')->get('contact_email');
-    $form['fs_gdpr']['szemelyes_extra'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['gdpr', 'gdpr-cond', 'gdpr-cond--szemelyes']],
-      'cim' => ['#markup' => '<p class="gdpr-cond__title">Fotókészítés a személyes alkalmon</p>'],
-      'foto_keszites' => [
-        '#type' => 'checkbox',
-        '#title' => 'Hozzájárulok, hogy a rendezvényen rólam fotó készüljön.',
-      ],
-      'foto_kozzetetel' => [
-        '#type' => 'checkbox',
-        '#title' => 'Hozzájárulok, hogy az Adatkezelő a rólam készült fotókat a képzés honlapján és közösségimédia-felületein eredménykommunikációs céllal megjelenítse.',
-      ],
-      'megjegyzes' => [
-        '#markup' => Markup::create('<p>Mindkét hozzájárulás önkéntes, a részvételnek nem feltétele, és bármikor visszavonható a(z) <a href="mailto:' . Html::escape($contact) . '">' . Html::escape($contact) . '</a> címen.</p>'),
-      ],
-    ];
     $form['fs_gdpr']['online_extra'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['gdpr', 'gdpr-cond', 'gdpr-cond--online']],
+      'cim' => ['#markup' => '<p class="gdpr-cond__title">Hangfelvétel az online alkalmon</p>'],
+      'hang_hozzajarulas' => [
+        '#type' => 'checkbox',
+        '#title' => 'Hozzájárulok, hogy Adatkezelő az esemény során feltett kérdéseimről, hozzászólásaimról hangfelvételt készítsen.',
+      ],
+      'onkentes' => [
+        '#markup' => Markup::create('<p>A hozzájárulás önkéntes, a részvételnek nem feltétele, és bármikor visszavonható a(z) <a href="mailto:' . Html::escape($contact) . '">' . Html::escape($contact) . '</a> címen.</p>'),
+      ],
       'megjegyzes' => [
-        '#markup' => '<p><strong>Képernyőfelvétel:</strong> az online alkalomról képernyőfelvétel készül. A résztvevők kamerája és mikrofonja az esemény alatt nem aktív; a résztvevőlistában megjelenő név és a csetben írt üzenetek a felvételen szerepelhetnek. Aki nem szeretné, hogy kérdése a felvételen megjelenjen, kérdését az esemény után e-mailben is felteheti. Részletek az <a href="' . Url::fromRoute('eforms_event.privacy')->toString() . '" target="_blank" rel="noopener">adatkezelési tájékoztatóban</a>.</p>',
+        '#markup' => '<p><strong>Képernyőfelvétel:</strong> az online alkalomról képernyőfelvétel készül. A résztvevők mikrofonja az esemény alatt nem aktív; a résztvevőlistában megjelenő név, profilkép és a csetben írt üzenetek a felvételen nem fognak szerepelni. Aki nem járul hozzá hangja rögzítéséhez, kérdését az esemény után e-mailben is felteheti. Részletek az <a href="' . Url::fromRoute('eforms_event.privacy')->toString() . '" target="_blank" rel="noopener">adatkezelési tájékoztatóban</a>.</p>',
       ],
       'segedlet' => [
         '#markup' => '<p>A csatlakozási linket e-mailben küldjük. A csatlakozáshoz <a href="' . Url::fromRoute('eforms_event.teams_guide')->toString() . '" target="_blank" rel="noopener">képes Teams-segédlet</a> is segít.</p>',
@@ -373,10 +366,9 @@ class RegistrationForm extends FormBase {
       return;
     }
 
-    // Fotóhozzájárulás csak a személyes alkalomnál értelmezett — online
+    // Hang-hozzájárulás csak az online alkalomnál értelmezett — személyes
     // beküldésnél akkor is hamis, ha a rejtett jelölőt bepipálták.
-    $foto_keszites = $esemeny === 'szemelyes' && (bool) $form_state->getValue('foto_keszites');
-    $foto_kozzetetel = $esemeny === 'szemelyes' && (bool) $form_state->getValue('foto_kozzetetel');
+    $hang_hozzajarulas = $esemeny === 'online' && (bool) $form_state->getValue('hang_hozzajarulas');
 
     $registration = Registration::create([
       'name' => $nev,
@@ -384,8 +376,7 @@ class RegistrationForm extends FormBase {
       'phone' => $telefon,
       'occasion' => $esemeny,
       'gdpr' => TRUE,
-      'photo_consent' => $foto_keszites,
-      'photo_publish_consent' => $foto_kozzetetel,
+      'audio_consent' => $hang_hozzajarulas,
     ]);
     $registration->save();
 
