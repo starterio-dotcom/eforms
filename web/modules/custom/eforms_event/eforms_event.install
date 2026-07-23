@@ -52,6 +52,17 @@ function eforms_event_update_10004(): string {
 }
 
 /**
+ * Adminisztrátori megjegyzés-mező telepítése.
+ */
+function eforms_event_update_10005(): string {
+  $field = BaseFieldDefinition::create('string_long')
+    ->setLabel(t('Megjegyzés'));
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('admin_note', 'eforms_registration', 'eforms_event', $field);
+  return 'Az admin_note mező telepítve.';
+}
+
+/**
  * Alkalmankénti regisztrációs határidő a globális helyett.
  */
 function eforms_event_update_10003(): string {

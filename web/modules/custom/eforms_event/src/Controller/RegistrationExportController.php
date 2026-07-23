@@ -26,7 +26,7 @@ class RegistrationExportController extends ControllerBase {
     $date_formatter = \Drupal::service('date.formatter');
 
     $handle = fopen('php://temp', 'r+');
-    fputcsv($handle, ['Azonosító', 'Teljes név', 'E-mail-cím', 'Telefonszám', 'Alkalom', 'Adatkezelés elfogadva', 'Fotó készítéséhez hozzájárult', 'Fotó közzétételéhez hozzájárult', 'Beküldve', 'Teams-meghívó kiküldve', 'Emlékeztető kiküldve'], ';');
+    fputcsv($handle, ['Azonosító', 'Teljes név', 'E-mail-cím', 'Telefonszám', 'Alkalom', 'Adatkezelés elfogadva', 'Fotó készítéséhez hozzájárult', 'Fotó közzétételéhez hozzájárult', 'Beküldve', 'Teams-meghívó kiküldve', 'Emlékeztető kiküldve', 'Megjegyzés'], ';');
     foreach ($storage->loadMultiple($ids) as $registration) {
       $teams_sent = (int) $registration->get('teams_invite_sent')->value;
       $reminder_sent = (int) $registration->get('reminder_sent')->value;
@@ -44,6 +44,7 @@ class RegistrationExportController extends ControllerBase {
           ? ''
           : ($teams_sent > 0 ? $date_formatter->format($teams_sent, 'custom', 'Y-m-d H:i:s') : 'függőben'),
         $reminder_sent > 0 ? $date_formatter->format($reminder_sent, 'custom', 'Y-m-d H:i:s') : '',
+        $this->sanitizeCell((string) $registration->get('admin_note')->value),
       ], ';');
     }
     rewind($handle);

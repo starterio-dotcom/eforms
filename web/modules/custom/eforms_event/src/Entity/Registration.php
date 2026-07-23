@@ -21,6 +21,8 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "list_builder" = "Drupal\eforms_event\RegistrationListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {
+ *       "default" = "Drupal\eforms_event\Form\RegistrationEditForm",
+ *       "edit" = "Drupal\eforms_event\Form\RegistrationEditForm",
  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm"
  *     },
  *     "route_provider" = {
@@ -36,6 +38,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   },
  *   links = {
  *     "collection" = "/admin/content/eforms-registrations",
+ *     "edit-form" = "/admin/content/eforms-registrations/{eforms_registration}/edit",
  *     "delete-form" = "/admin/content/eforms-registrations/{eforms_registration}/delete"
  *   }
  * )
@@ -96,6 +99,15 @@ class Registration extends ContentEntityBase {
       ->setLabel(t('Hozzájárult a fotók közzétételéhez'))
       ->setDefaultValue(FALSE)
       ->setInitialValue(FALSE);
+
+    $fields['admin_note'] = BaseFieldDefinition::create('string_long')
+      ->setLabel(t('Megjegyzés'))
+      ->setDescription(t('Belső, adminisztrátori megjegyzés — a regisztráló nem látja.'))
+      ->setDisplayOptions('form', [
+        'type' => 'string_textarea',
+        'weight' => 0,
+        'settings' => ['rows' => 4],
+      ]);
 
     return $fields;
   }

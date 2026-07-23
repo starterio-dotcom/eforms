@@ -25,6 +25,7 @@ class RegistrationListBuilder extends EntityListBuilder {
       'teams' => $this->t('Teams-meghívó'),
       'reminder' => $this->t('Emlékeztető'),
       'photo' => $this->t('Fotó (készítés / közzététel)'),
+      'note' => $this->t('Megjegyzés'),
     ];
     return $header + parent::buildHeader();
   }
@@ -54,8 +55,25 @@ class RegistrationListBuilder extends EntityListBuilder {
       'photo' => $entity->get('occasion')->value !== 'szemelyes'
         ? '—'
         : (($entity->get('photo_consent')->value ? 'igen' : 'nem') . ' / ' . ($entity->get('photo_publish_consent')->value ? 'igen' : 'nem')),
+      'note' => ($note = (string) $entity->get('admin_note')->value) === ''
+        ? '—'
+        : (mb_strlen($note) > 40 ? mb_substr($note, 0, 40) . '…' : $note),
     ];
     return $row + parent::buildRow($entity);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefaultOperations(EntityInterface $entity): array {
+    $operations = parent::getDefaultOperations($entity);
+    if (isset($operations['edit'])) {
+      $operations['edit']['title'] = $this->t('Megjegyzés szerkesztése');
+    }
+    if (isset($operations['delete'])) {
+      $operations['delete']['title'] = $this->t('Törlés');
+    }
+    return $operations;
   }
 
   /**
