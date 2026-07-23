@@ -224,6 +224,12 @@ footer { background: var(--indigo-1100); color: #fff; margin-top: 64px; }
 .doc-datalist { list-style: none; padding: 0; margin: 0 0 12px; border: 1px solid var(--border-neutral-divider); border-radius: 12px; overflow: hidden; }
 .doc-datalist li { padding: 10px 16px; font-size: 15px; line-height: 1.5; }
 .doc-datalist li + li { border-top: 1px solid var(--border-neutral-divider); }
+.guide-fig { margin: 14px 0 4px; }
+.guide-fig img { max-width: 100%; height: auto; display: block; border: 1px solid var(--border-neutral-divider); border-radius: 12px; }
+.guide-fig figcaption { margin-top: 6px; font-size: 13px; color: var(--text-neutral-subtle); }
+.guide-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 14px 0 4px; }
+.guide-pair .guide-fig { margin: 0; }
+.doc-cta .note { font-size: 13px; color: var(--text-neutral-subtle); }
 @media (max-width: 640px) { .doc-panel { padding: 28px 22px; } }
 
 /* Térkép */

@@ -48,6 +48,12 @@ function eforms_event_theme(array $existing, string $type, string $theme, string
         'contact_email' => '',
       ],
     ],
+    'eforms_teams_guide' => [
+      'variables' => [
+        'contact_email' => '',
+        'base' => '',
+      ],
+    ],
   ];
 }
 
@@ -125,6 +131,7 @@ function eforms_event_mail(string $key, array &$message, array $params): void {
     '@kapcsolat' => $config->get('contact_email') ?: '',
     '@menetrend' => \Drupal\Core\Url::fromRoute('eforms_event.page', [], ['absolute' => TRUE])->toString(),
     '@adatkezeles' => \Drupal\Core\Url::fromRoute('eforms_event.privacy', [], ['absolute' => TRUE])->toString(),
+    '@segedlet' => \Drupal\Core\Url::fromRoute('eforms_event.teams_guide', [], ['absolute' => TRUE])->toString(),
   ];
 
   if ($template && !empty($template['body'])) {

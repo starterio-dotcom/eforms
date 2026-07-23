@@ -38,6 +38,14 @@ eforms_event.imprint:
   requirements:
     _access: 'TRUE'
 
+eforms_event.teams_guide:
+  path: '/csatlakozasi-segedlet'
+  defaults:
+    _controller: '\Drupal\eforms_event\Controller\EventController::teamsGuidePage'
+    _title: 'Microsoft Teams csatlakozási segédlet'
+  requirements:
+    _access: 'TRUE'
+
 eforms_event.export:
   path: '/admin/content/eforms-registrations/export'
   defaults:

@@ -204,4 +204,18 @@ class EventController extends ControllerBase {
     ];
   }
 
+  /**
+   * Microsoft Teams csatlakozási segédlet — képes lépéssorral.
+   */
+  public function teamsGuidePage(): array {
+    return [
+      '#theme' => 'eforms_teams_guide',
+      '#contact_email' => $this->config('eforms_event.settings')->get('contact_email') ?: '',
+      '#base' => $this->moduleList->getPath('eforms_event') . '/images/segedlet',
+      '#cache' => [
+        'tags' => ['config:eforms_event.settings'],
+      ],
+    ];
+  }
+
 }

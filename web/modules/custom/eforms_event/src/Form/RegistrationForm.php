@@ -240,6 +240,9 @@ class RegistrationForm extends FormBase {
       'megjegyzes' => [
         '#markup' => '<p><strong>Képernyőfelvétel:</strong> az online alkalomról képernyőfelvétel készül. A résztvevők kamerája és mikrofonja az esemény alatt nem aktív; a résztvevőlistában megjelenő név és a csetben írt üzenetek a felvételen szerepelhetnek. Aki nem szeretné, hogy kérdése a felvételen megjelenjen, kérdését az esemény után e-mailben is felteheti. Részletek az <a href="' . Url::fromRoute('eforms_event.privacy')->toString() . '" target="_blank" rel="noopener">adatkezelési tájékoztatóban</a>.</p>',
       ],
+      'segedlet' => [
+        '#markup' => '<p>A csatlakozási linket e-mailben küldjük. A csatlakozáshoz <a href="' . Url::fromRoute('eforms_event.teams_guide')->toString() . '" target="_blank" rel="noopener">képes Teams-segédlet</a> is segít.</p>',
+      ],
     ];
 
     // Küldés.

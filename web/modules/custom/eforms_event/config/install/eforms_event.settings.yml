@@ -22,30 +22,26 @@ emails:
       Üdvözlettel:
       Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
   teams:
-    subject: 'Microsoft Teams meghívó és csatlakozási segédlet — szakmai tájékoztató nap'
+    subject: 'Microsoft Teams meghívó — szakmai tájékoztató nap'
     body: |
       Tisztelt @nev!
 
-      Ezzel az üzenettel küldjük „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” szakmai tájékoztató nap (@datum) Microsoft Teams csatlakozási linkjét és a csatlakozási segédletet.
+      Ezzel az üzenettel küldjük „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” szakmai tájékoztató nap (@datum) Microsoft Teams csatlakozási linkjét.
 
       Az értekezlethez az alábbi linkre kattintva tud csatlakozni:
       @link
 
-      MICROSOFT TEAMS CSATLAKOZÁSI SEGÉDLET
+      A csatlakozás röviden:
+      1. Kattintson a fenti linkre.
+      2. Válassza a „Folytatás ebben a böngészőben” lehetőséget, vagy nyissa meg a Teams alkalmazást.
+      3. A kamera/mikrofon engedélykérésnél az „Engedélyezés” és a „Letiltás” is megfelelő — ezekre nincs szükség.
+      4. Adja meg a TELJES NEVÉT (a jelentkezéskor megadottat), majd kattintson a „Csatlakozás” / „Join now” gombra.
+      5. Kérjük, várjon, míg kollégáink beengedik.
 
-      Támogatott böngészőkben (pl. Google Chrome, Microsoft Edge) az alábbi lehetőségek közül választhat:
-      – Amennyiben böngészőből szeretne részt venni, kattintson a „Folytatás ebben a böngészőben” lehetőségre.
-      – Amennyiben a Teams alkalmazásban szeretne részt venni, és az telepítve van számítógépén, kattintson az „A Teams app megnyitása” lehetőségre.
-      – Amennyiben a Teams alkalmazásban szeretne részt venni, de az nincs telepítve számítógépén, kattintson az „A Windowshoz készült app letöltése” lehetőségre.
+      Képernyőképes, részletes csatlakozási segédlet (böngészőből és a Teams alkalmazásból is):
+      @segedlet
 
-      Mozilla Firefoxban és egyéb, nem támogatott böngészőben:
-      – Böngészős részvételhez kattintson az „A Teams használata a Microsoft Edge böngészőben” lehetőségre; a Teams alkalmazás megnyitása vagy letöltése itt is elérhető.
-
-      Böngészőben való folytatás esetén a Teams engedélyt fog kérni a webkamera és a mikrofon használatához. A szakmai tájékoztató napon nincs lehetőség ezek használatára, így kattinthat az „Engedélyezés” vagy a „Letiltás” lehetőségre is. Amennyiben a „Letiltás” opciót választotta, a megjelenő figyelmeztetésnél kattintson a „Folytatás hang és videokép nélkül” gombra.
-
-      Belépés előtt kérjük, írja be a „Név megadása” (a Teams alkalmazásban: „Enter Name”) mezőbe a teljes nevét, valamint győződjön meg arról, hogy a mező alatti kamera- és mikrofonikonok át vannak húzva — állapotukat a mellettük lévő kapcsolókkal tudja módosítani. Ezután kattintson a „Csatlakozás” („Join now”) gombra.
-
-      Kérjük, várjon türelemmel, míg kollégáink beengedik Önt a szakmai tájékoztató napra! Felhívjuk figyelmét: amennyiben nem a jelentkezéskor megadott névvel próbál csatlakozni, kollégáink nem tudják Önt beengedni.
+      Fontos: amennyiben nem a jelentkezéskor megadott névvel próbál csatlakozni, kollégáink nem tudják Önt beengedni.
 
       Tájékoztatjuk, hogy az online szakmai tájékoztató napról képernyőfelvétel készül. A résztvevők kamerája és mikrofonja az esemény alatt nem aktív; a résztvevőlistában megjelenő név és a csetben írt üzenetek a felvételen szerepelhetnek. Részletek az adatkezelési tájékoztatóban: @adatkezeles
 

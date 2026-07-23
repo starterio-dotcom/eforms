@@ -1,0 +1,84 @@
+{#
+/**
+ * @file
+ * Microsoft Teams csatlakozási segédlet — képes lépéssor.
+ *
+ * Változók:
+ * - contact_email: kapcsolattartó e-mail.
+ * - base: a segédlet-képek könyvtárának útvonala.
+ */
+#}
+{% set img = base_path ~ base ~ '/' %}
+<div class="wrap">
+  <div class="page-head">
+    <h1>Microsoft Teams csatlakozási segédlet</h1>
+    <p>Az online szakmai tájékoztató naphoz az e-mailben kapott linkre kattintva tud csatlakozni. Az alábbi lépések végigvezetik a csatlakozáson — böngészőből és a Teams alkalmazásból egyaránt.</p>
+  </div>
+  <div class="layout">
+    <div class="doc-panel">
+
+      <h2>1. Csatlakozás a linkre kattintva</h2>
+      <p>A visszaigazoló, illetve a meghívó e-mailben megkapja a „Kattintson ide az értekezlethez való csatlakozáshoz” linket. Erre kattintva a böngésző megnyitja a csatlakozási felületet.</p>
+
+      <h2>2. Válasszon csatlakozási módot</h2>
+      <p><strong>Támogatott böngészőkben</strong> (pl. Google Chrome, Microsoft Edge) az alábbi lehetőségek közül választhat:</p>
+      <figure class="guide-fig">
+        <img src="{{ img }}01-tamogatott-bongeszo.png" alt="Csatlakozási lehetőségek támogatott böngészőben: app letöltése, folytatás a böngészőben, a Teams app megnyitása" loading="lazy">
+      </figure>
+      <ul>
+        <li><strong>Folytatás ebben a böngészőben</strong> — ha telepítés nélkül, böngészőből szeretne csatlakozni (ezt ajánljuk, ha nincs Teams appja).</li>
+        <li><strong>A Teams app megnyitása</strong> — ha a Teams alkalmazás telepítve van a gépén.</li>
+        <li><strong>A Windowshoz készült app letöltése</strong> — ha telepítené az alkalmazást.</li>
+      </ul>
+      <p><strong>Mozilla Firefoxban</strong> és egyéb, nem támogatott böngészőben a böngészős részvételhez az „A Teams használata a Microsoft Edge böngészőben” lehetőséget válassza:</p>
+      <figure class="guide-fig">
+        <img src="{{ img }}02-nem-tamogatott-bongeszo.png" alt="Csatlakozási lehetőségek nem támogatott böngészőben: Teams használata a Microsoft Edge böngészőben" loading="lazy">
+      </figure>
+
+      <h2>3. Kamera és mikrofon engedélyezése</h2>
+      <p>Böngészőből való csatlakozáskor a Teams engedélyt kér a webkamera és a mikrofon használatához. A szakmai tájékoztató napon ezekre nincs szükség, így nyugodtan választhatja az <strong>Engedélyezés</strong> vagy a <strong>Letiltás</strong> lehetőséget is.</p>
+      <figure class="guide-fig">
+        <img src="{{ img }}03-engedelykeres.png" alt="A böngésző engedélykérő ablaka a mikrofon és kamera használatához" loading="lazy">
+      </figure>
+      <p>Ha a <strong>Letiltás</strong> opciót választotta, a megjelenő figyelmeztetésnél kattintson a <strong>Folytatás hang és videokép nélkül</strong> gombra. (A hangot és a videót így is fogadni fogja, csak megosztani nem.)</p>
+      <figure class="guide-fig">
+        <img src="{{ img }}04-folytatas-felvetel-nelkul.png" alt="Figyelmeztető képernyő a Folytatás hang és videokép nélkül gombbal" loading="lazy">
+      </figure>
+
+      <h2>4. Adja meg a nevét, majd csatlakozzon</h2>
+      <p>A belépés előtt írja be a teljes nevét a névmezőbe, és győződjön meg arról, hogy a mező alatti kamera- és mikrofonikonok át vannak húzva (a mellettük lévő kapcsolókkal állíthatók).</p>
+      <div class="guide-pair">
+        <figure class="guide-fig">
+          <img src="{{ img }}05-nevbeiras-bongeszo.png" alt="Böngészős névbeíró képernyő a Név megadása mezővel és a Csatlakozás gombbal" loading="lazy">
+          <figcaption>Böngészőben: „Név megadása” mező → <strong>Csatlakozás</strong></figcaption>
+        </figure>
+        <figure class="guide-fig">
+          <img src="{{ img }}06-nevbeiras-app.png" alt="Teams alkalmazás névbeíró képernyője az Enter Name mezővel és a Join now gombbal" loading="lazy">
+          <figcaption>Teams alkalmazásban: „Enter Name” mező → <strong>Join now</strong></figcaption>
+        </figure>
+      </div>
+
+      <h2>5. Várjon a beengedésre</h2>
+      <p>A <strong>Csatlakozás</strong> („Join now”) gomb után az alábbi képernyők egyikét fogja látni. Kérjük, várjon türelemmel, míg kollégáink beengedik Önt a szakmai tájékoztató napra.</p>
+      <div class="guide-pair">
+        <figure class="guide-fig">
+          <img src="{{ img }}07-varakozas-hu.png" alt="Magyar nyelvű várakozó képernyő: Értesítettük az értekezlet résztvevőit arról, hogy várakozik" loading="lazy">
+        </figure>
+        <figure class="guide-fig">
+          <img src="{{ img }}08-varakozas-en.png" alt="Angol nyelvű várakozó képernyő: We've let people in the meeting know you're waiting" loading="lazy">
+        </figure>
+      </div>
+      <div class="dap-callout dap-callout--informative">
+        <div class="dap-callout__body">
+          <div class="dap-callout__title">Fontos</div>
+          <div class="dap-callout__text">Amennyiben nem a jelentkezéskor megadott névvel próbál csatlakozni, kollégáink nem tudják Önt beengedni. Kérjük, a teljes nevét adja meg.</div>
+        </div>
+      </div>
+
+      <div class="doc-cta">
+        <a class="dap-btn dap-btn--medium" href="{{ path('eforms_event.page') }}">Vissza az eseményoldalra</a>
+        <span class="note">Technikai kérdés esetén: <a href="mailto:{{ contact_email }}">{{ contact_email }}</a></span>
+      </div>
+    </div>
+  </div>
+</div>
