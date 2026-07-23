@@ -5,9 +5,6 @@ eforms_event.settings:
     contact_email:
       type: email
       label: 'Kapcsolattartó e-mail'
-    registration_deadline:
-      type: string
-      label: 'Regisztrációs határidő (Y-m-d\TH:i:s, site időzónában; üres = nincs)'
     teams_link:
       type: string
       label: 'Microsoft Teams értekezlet csatlakozási linkje'
@@ -78,6 +75,9 @@ eforms_event.occasion:
     date:
       type: string
       label: 'Az alkalom napja (ISO, Y-m-d) — az emlékeztető időzítéséhez'
+    deadline:
+      type: string
+      label: 'Regisztrációs határidő (Y-m-d\TH:i:s, site időzónában; üres = nincs)'
     date_label:
       type: label
       label: 'Dátum felirat'

@@ -62,15 +62,12 @@
           {% for row in o.rows %}
             <div><i class="{{ row.icon }}" aria-hidden="true"></i>{{ row.text }}</div>
           {% endfor %}
-        </div>
-        <div class="cap">
-          <div class="cap-line"><span>Szabad helyek</span><span>{{ o.free }} / {{ o.capacity }}</span></div>
-          <div class="dap-progress" role="progressbar" aria-label="Foglaltság — {{ o.label }}" aria-valuenow="{{ o.taken }}" aria-valuemin="0" aria-valuemax="{{ o.capacity }}" aria-valuetext="{{ o.taken }} foglalt hely a {{ o.capacity }}-ből">
-            <div class="dap-progress__fill" style="width: {{ o.capacity > 0 ? ((o.taken / o.capacity) * 100)|round : 0 }}%"></div>
-          </div>
+          {% if o.reg_open and o.deadline_label %}
+            <div><i class="ri-calendar-check-line" aria-hidden="true"></i>Regisztráció: {{ o.deadline_label }}-ig</div>
+          {% endif %}
         </div>
         <div class="evc-cta">
-          {% if not reg_open %}
+          {% if not o.reg_open %}
             <span class="dap-btn dap-btn--medium dap-btn--secondary dap-btn--block dap-btn--disabled" aria-disabled="true">A regisztráció lezárult</span>
           {% elseif o.full %}
             <span class="dap-btn dap-btn--medium dap-btn--secondary dap-btn--block" aria-disabled="true">Betelt</span>

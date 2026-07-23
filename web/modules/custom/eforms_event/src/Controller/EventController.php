@@ -58,9 +58,11 @@ class EventController extends ControllerBase {
    * cron-alapú érvénytelenítés gondoskodik az átbillenésről.
    */
   protected function handleDeadlineCaching(): void {
-    $deadline = $this->capacity->getDeadline();
-    if ($deadline && abs($deadline->getTimestamp() - time()) < 3600) {
-      $this->pageCacheKillSwitch->trigger();
+    foreach ($this->capacity->getDeadlines() as $deadline) {
+      if (abs($deadline->getTimestamp() - time()) < 3600) {
+        $this->pageCacheKillSwitch->trigger();
+        return;
+      }
     }
   }
 
@@ -120,10 +122,21 @@ class EventController extends ControllerBase {
       ];
     }
 
+    // Alkalmankénti határidő-összefoglaló az űrlap fejlécéhez.
+    $deadline_parts = [];
+    foreach ($this->capacity->getOccasions() as $occasion) {
+      if (!$occasion['reg_open']) {
+        $deadline_parts[] = $occasion['label'] . ': a regisztráció lezárult';
+      }
+      elseif ($occasion['deadline_label']) {
+        $deadline_parts[] = $occasion['label'] . ': ' . $occasion['deadline_label'] . '-ig';
+      }
+    }
+
     return [
       '#theme' => 'eforms_register_page',
       '#form' => $this->formBuilder()->getForm(RegistrationForm::class),
-      '#deadline_label' => $this->capacity->getDeadlineLabel(),
+      '#deadline_info' => implode(' · ', $deadline_parts),
       '#cache' => [
         'tags' => ['eforms_registration_list', 'config:eforms_event.settings'],
         'contexts' => ['url.query_args:alkalom'],

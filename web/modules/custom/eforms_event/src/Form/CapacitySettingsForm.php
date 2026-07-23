@@ -53,25 +53,6 @@ class CapacitySettingsForm extends ConfigFormBase {
       '#markup' => '<p>A <em>szabad helyek</em> számítása: kapacitás − (induló foglaltság + beérkezett regisztrációk). A módosítás mentés után azonnal megjelenik az eseményoldalon és a regisztrációs űrlapon.</p>',
     ];
 
-    // Regisztrációs határidő.
-    $deadline_raw = (string) $this->config('eforms_event.settings')->get('registration_deadline');
-    $is_open = $this->capacity->isOpen();
-    $form['deadline'] = [
-      '#type' => 'details',
-      '#title' => 'Regisztrációs határidő',
-      '#open' => TRUE,
-    ];
-    $form['deadline']['allapot'] = [
-      '#markup' => '<p><strong>A regisztráció jelenleg: ' . ($is_open ? 'NYITVA' : 'LEZÁRVA') . '</strong>'
-      . ($this->capacity->getDeadlineLabel() ? ' · határidő: ' . $this->capacity->getDeadlineLabel() : ' · nincs határidő beállítva') . '</p>',
-    ];
-    $form['deadline']['registration_deadline'] = [
-      '#type' => 'datetime',
-      '#title' => 'Határidő',
-      '#default_value' => $deadline_raw !== '' ? new DrupalDateTime($deadline_raw) : NULL,
-      '#description' => 'Eddig az időpontig lehet regisztrálni; utána a regisztráció automatikusan lezár minden felületen. Üresen hagyva a regisztráció nyitva marad.',
-    ];
-
     // Microsoft Teams meghívó (online alkalom).
     $teams_link = (string) $this->config('eforms_event.settings')->get('teams_link');
     $pending = $this->teamsInvite->pendingCount();
@@ -122,7 +103,9 @@ class CapacitySettingsForm extends ConfigFormBase {
       $form[$key]['allapot'] = [
         '#markup' => '<p><strong>Jelenlegi állapot:</strong> ' . $occasion['taken'] . ' / ' . $occasion['capacity']
         . ' foglalt (ebből beérkezett regisztráció: ' . $occasion['registered'] . ') · szabad helyek: <strong>'
-        . $occasion['free'] . '</strong>' . ($occasion['full'] ? ' — <strong>BETELT</strong>' : '') . '</p>',
+        . $occasion['free'] . '</strong>' . ($occasion['full'] ? ' — <strong>BETELT</strong>' : '')
+        . ' · regisztráció: <strong>' . ($occasion['reg_open'] ? 'NYITVA' : 'LEZÁRVA') . '</strong>'
+        . ($occasion['deadline_label'] ? ' (határidő: ' . $occasion['deadline_label'] . ')' : ' (nincs határidő)') . '</p>',
       ];
       $form[$key]['capacity'] = [
         '#type' => 'number',
@@ -138,7 +121,13 @@ class CapacitySettingsForm extends ConfigFormBase {
         '#default_value' => $occasion['base_taken'],
         '#min' => 0,
         '#required' => TRUE,
-        '#description' => 'A rendszeren kívül (pl. más csatornán) már lefoglalt helyek száma — ez a beérkezett regisztrációkon felül számít foglaltnak.',
+        '#description' => 'A rendszeren kívül (pl. más csatornán) már lefoglalt helyek száma — ez a beérkezett regisztrációkon felül számít foglaltnak. A pontos szabadhely-számok csak itt, az adminban látszanak — a nyilvános oldalak csak minőségi jelzést mutatnak.',
+      ];
+      $form[$key]['deadline'] = [
+        '#type' => 'datetime',
+        '#title' => 'Regisztrációs határidő (' . $occasion['label'] . ')',
+        '#default_value' => !empty($occasion['deadline']) ? new DrupalDateTime($occasion['deadline']) : NULL,
+        '#description' => 'Eddig lehet erre az alkalomra regisztrálni; utána az alkalom automatikusan lezár. Üresen hagyva nincs határidő.',
       ];
     }
 
@@ -169,13 +158,17 @@ class CapacitySettingsForm extends ConfigFormBase {
       $values = $form_state->getValue($key);
       $config->set('occasions.' . $key . '.capacity', (int) $values['capacity']);
       $config->set('occasions.' . $key . '.base_taken', (int) $values['base_taken']);
+      $deadline = $values['deadline'] ?? NULL;
+      $config->set('occasions.' . $key . '.deadline', $deadline instanceof DrupalDateTime ? $deadline->format('Y-m-d\TH:i:s') : '');
     }
-    $deadline = $form_state->getValue('registration_deadline');
-    $config->set('registration_deadline', $deadline instanceof DrupalDateTime ? $deadline->format('Y-m-d\TH:i:s') : '');
     $config->set('teams_link', trim((string) $form_state->getValue('teams_link')));
     $config->save();
-    // A nyitva/lezárva állapotjelző szinkronban tartása a cron-logikával.
-    \Drupal::state()->set('eforms_event.reg_open', $this->capacity->isOpen());
+    // A nyitva/lezárva állapottérkép szinkronban tartása a cron-logikával.
+    $map = [];
+    foreach ($this->capacity->getOccasions() as $key => $occasion) {
+      $map[$key] = (bool) $occasion['reg_open'];
+    }
+    \Drupal::state()->set('eforms_event.reg_open_map', $map);
     $this->messenger()->addStatus('A beállítások mentve. A nyilvános oldalak azonnal frissültek.');
 
     // Függőben lévő Teams-meghívók kiküldése az újonnan mentett linkkel.

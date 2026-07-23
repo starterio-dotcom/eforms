@@ -23,7 +23,7 @@ function eforms_event_theme(array $existing, string $type, string $theme, string
     'eforms_register_page' => [
       'variables' => [
         'form' => NULL,
-        'deadline_label' => '',
+        'deadline_info' => '',
       ],
     ],
     'eforms_register_closed' => [
@@ -79,10 +79,15 @@ function eforms_event_themes_installed(array $theme_list): void {
  * oldalakat, hogy a lezárt állapot külső esemény nélkül is megjelenjen.
  */
 function eforms_event_cron(): void {
-  $open = \Drupal::service('eforms_event.capacity')->isOpen();
-  $last = \Drupal::state()->get('eforms_event.reg_open');
-  if ($last === NULL || (bool) $last !== $open) {
-    \Drupal::state()->set('eforms_event.reg_open', $open);
+  // Alkalmankénti nyitva/lezárva térkép — bármelyik átbillenése érvényteleníti
+  // a gyorsítótárazott nyilvános oldalakat.
+  $map = [];
+  foreach (\Drupal::service('eforms_event.capacity')->getOccasions() as $key => $occasion) {
+    $map[$key] = (bool) $occasion['reg_open'];
+  }
+  $last = \Drupal::state()->get('eforms_event.reg_open_map');
+  if ($last !== $map) {
+    \Drupal::state()->set('eforms_event.reg_open_map', $map);
     \Drupal\Core\Cache\Cache::invalidateTags(['config:eforms_event.settings']);
   }
 

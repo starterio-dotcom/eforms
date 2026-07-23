@@ -59,7 +59,7 @@ class RegistrationForm extends FormBase {
     $errors = $form_state->get('eforms_errors') ?? [];
     $input = $form_state->getUserInput();
     $selected = (string) ($input['esemeny'] ?? $this->getRequest()->query->get('alkalom', ''));
-    if (!isset($occasions[$selected])) {
+    if (!isset($occasions[$selected]) || empty($occasions[$selected]['selectable'])) {
       $selected = '';
     }
 
@@ -81,10 +81,11 @@ class RegistrationForm extends FormBase {
     $cards = '';
     foreach ($occasions as $key => $occasion) {
       $is_selected = $selected === $key;
-      $cards .= '<label class="evopt' . ($is_selected ? ' sel' : '') . ($occasion['full'] ? ' evopt--disabled' : '') . '">'
+      $disabled = empty($occasion['selectable']);
+      $cards .= '<label class="evopt' . ($is_selected ? ' sel' : '') . ($disabled ? ' evopt--disabled' : '') . '">'
         . '<input type="radio" name="esemeny" value="' . Html::escape($key) . '"'
         . ($is_selected ? ' checked="checked"' : '')
-        . ($occasion['full'] ? ' disabled="disabled"' : '')
+        . ($disabled ? ' disabled="disabled"' : '')
         . '>'
         . '<span class="evopt-top"><b>' . Html::escape($occasion['label']) . '</b><span class="radio-dot"></span></span>'
         . '<span class="d">' . Html::escape($occasion['date_label']) . ' · ' . Html::escape($occasion['time_label'])
@@ -283,6 +284,9 @@ class RegistrationForm extends FormBase {
     $errors = [];
     if (!isset($occasions[$esemeny])) {
       $errors['esemeny'] = 'Válasszon egy alkalmat a részvételhez.';
+    }
+    elseif (empty($occasions[$esemeny]['reg_open'])) {
+      $errors['esemeny'] = 'Erre az alkalomra a regisztrációs határidő lejárt.';
     }
     elseif ($occasions[$esemeny]['full']) {
       $errors['esemeny'] = 'Sajnáljuk, ez az alkalom időközben betelt. Kérjük, válassza a másik alkalmat.';

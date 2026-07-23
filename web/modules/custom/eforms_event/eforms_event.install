@@ -32,3 +32,20 @@ function eforms_event_update_10002(): string {
     ->installFieldStorageDefinition('reminder_sent', 'eforms_registration', 'eforms_event', $field);
   return 'A reminder_sent mező telepítve az eforms_registration entitásra.';
 }
+
+/**
+ * Alkalmankénti regisztrációs határidő a globális helyett.
+ */
+function eforms_event_update_10003(): string {
+  $config = \Drupal::configFactory()->getEditable('eforms_event.settings');
+  $old = (string) $config->get('registration_deadline');
+  foreach (array_keys($config->get('occasions') ?: []) as $key) {
+    if ($config->get('occasions.' . $key . '.deadline') === NULL) {
+      $config->set('occasions.' . $key . '.deadline', $old);
+    }
+  }
+  $config->clear('registration_deadline');
+  $config->save();
+  \Drupal::state()->delete('eforms_event.reg_open');
+  return 'Alkalmankénti regisztrációs határidők beállítva (a korábbi globális értékkel).';
+}

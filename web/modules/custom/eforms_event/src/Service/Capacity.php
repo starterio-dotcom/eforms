@@ -18,10 +18,9 @@ class Capacity {
   ) {}
 
   /**
-   * A regisztrációs határidő, ha be van állítva.
+   * Határidő-string értelmezése a site időzónájában.
    */
-  public function getDeadline(): ?\DateTimeImmutable {
-    $raw = (string) $this->configFactory->get('eforms_event.settings')->get('registration_deadline');
+  protected function parseDeadline(string $raw): ?\DateTimeImmutable {
     if ($raw === '') {
       return NULL;
     }
@@ -35,23 +34,61 @@ class Capacity {
   }
 
   /**
-   * Nyitva van-e még a regisztráció.
+   * Határidő magyar formátumban (pl. „2026. augusztus 10. 23:59”).
    */
-  public function isOpen(): bool {
-    $deadline = $this->getDeadline();
-    return $deadline === NULL || time() <= $deadline->getTimestamp();
-  }
-
-  /**
-   * A határidő magyar formátumban (pl. „2026. augusztus 10. 23:59”).
-   */
-  public function getDeadlineLabel(): string {
-    $deadline = $this->getDeadline();
+  public function formatDeadline(?\DateTimeImmutable $deadline): string {
     if ($deadline === NULL) {
       return '';
     }
     $months = [1 => 'január', 'február', 'március', 'április', 'május', 'június', 'július', 'augusztus', 'szeptember', 'október', 'november', 'december'];
     return $deadline->format('Y') . '. ' . $months[(int) $deadline->format('n')] . ' ' . $deadline->format('j') . '. ' . $deadline->format('H:i');
+  }
+
+  /**
+   * Az alkalmankénti határidők (csak a beállítottak).
+   *
+   * @return array<string, \DateTimeImmutable>
+   */
+  public function getDeadlines(): array {
+    $occasions = $this->configFactory->get('eforms_event.settings')->get('occasions') ?: [];
+    $deadlines = [];
+    foreach ($occasions as $key => $occasion) {
+      $deadline = $this->parseDeadline((string) ($occasion['deadline'] ?? ''));
+      if ($deadline !== NULL) {
+        $deadlines[$key] = $deadline;
+      }
+    }
+    return $deadlines;
+  }
+
+  /**
+   * Van-e még legalább egy alkalom, amelyre lehet regisztrálni (határidő
+   * szerint).
+   */
+  public function isOpen(): bool {
+    $occasions = $this->configFactory->get('eforms_event.settings')->get('occasions') ?: [];
+    if (!$occasions) {
+      return TRUE;
+    }
+    $now = time();
+    foreach ($occasions as $occasion) {
+      $deadline = $this->parseDeadline((string) ($occasion['deadline'] ?? ''));
+      if ($deadline === NULL || $now <= $deadline->getTimestamp()) {
+        return TRUE;
+      }
+    }
+    return FALSE;
+  }
+
+  /**
+   * A legkésőbbi határidő felirata (hero-chip, lezárt oldal).
+   */
+  public function getDeadlineLabel(): string {
+    $deadlines = $this->getDeadlines();
+    if (!$deadlines) {
+      return '';
+    }
+    return $this->formatDeadline(max($deadlines));
   }
 
   /**
@@ -76,13 +113,21 @@ class Capacity {
       $taken = min((int) $occasion['capacity'], (int) $occasion['base_taken'] + $count);
       $free = max(0, (int) $occasion['capacity'] - $taken);
 
-      if ($free === 0) {
+      $deadline = $this->parseDeadline((string) ($occasion['deadline'] ?? ''));
+      $reg_open = $deadline === NULL || time() <= $deadline->getTimestamp();
+
+      // A nyilvános jelvények számot nem árulnak el, csak minőségi állapotot.
+      if (!$reg_open) {
+        $badge_type = 'negative';
+        $badge_text = 'Lezárva';
+      }
+      elseif ($free === 0) {
         $badge_type = 'negative';
         $badge_text = 'Betelt';
       }
       elseif ($free <= 10) {
         $badge_type = 'warning';
-        $badge_text = 'Már csak ' . $free . ' szabad hely';
+        $badge_text = 'Utolsó helyek';
       }
       else {
         $badge_type = 'positive';
@@ -94,10 +139,12 @@ class Capacity {
         'free' => $free,
         'registered' => $count,
         'full' => $free === 0,
+        'reg_open' => $reg_open,
+        'selectable' => $reg_open && $free > 0,
+        'deadline_label' => $this->formatDeadline($deadline),
         'badge_type' => $badge_type,
         'badge_text' => $badge_text,
-        // Az eseményoldali kártya rövidebb badge-e.
-        'card_badge_text' => $free === 0 ? 'Betelt' : ($free <= 10 ? 'Utolsó helyek' : 'Van szabad hely'),
+        'card_badge_text' => $badge_text,
       ];
     }
     return $result;
