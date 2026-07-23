@@ -215,23 +215,14 @@ class RegistrationForm extends FormBase {
       $form['fs_gdpr']['box']['gdpr_error'] = $this->feedback($errors['gdpr'], 'eforms-gdpr-error');
     }
 
-    // Alkalomfüggő adatkezelési blokk — csak az online ághoz van külön
-    // hozzájárulás (hangfelvétel). A CSS :has() mutatja a kiválasztott
-    // alkalomhoz tartozót; szerveroldalon csak a releváns érték tárolódik.
-    $contact = (string) $this->configFactory()->get('eforms_event.settings')->get('contact_email');
+    // Alkalomfüggő adatkezelési blokk — az online ágon már csak tájékoztatás
+    // (nincs külön hozzájárulás). A CSS :has() mutatja a kiválasztott
+    // alkalomhoz tartozót.
     $form['fs_gdpr']['online_extra'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['gdpr', 'gdpr-cond', 'gdpr-cond--online']],
-      'cim' => ['#markup' => '<p class="gdpr-cond__title">Hangfelvétel az online alkalmon</p>'],
-      'hang_hozzajarulas' => [
-        '#type' => 'checkbox',
-        '#title' => 'Hozzájárulok, hogy Adatkezelő az esemény során feltett kérdéseimről, hozzászólásaimról hangfelvételt készítsen.',
-      ],
-      'onkentes' => [
-        '#markup' => Markup::create('<p>A hozzájárulás önkéntes, a részvételnek nem feltétele, és bármikor visszavonható a(z) <a href="mailto:' . Html::escape($contact) . '">' . Html::escape($contact) . '</a> címen.</p>'),
-      ],
       'megjegyzes' => [
-        '#markup' => '<p><strong>Képernyőfelvétel:</strong> az online alkalomról képernyőfelvétel készül. A résztvevők mikrofonja az esemény alatt nem aktív; a résztvevőlistában megjelenő név, profilkép és a csetben írt üzenetek a felvételen nem fognak szerepelni. Aki nem járul hozzá hangja rögzítéséhez, kérdését az esemény után e-mailben is felteheti. Részletek az <a href="' . Url::fromRoute('eforms_event.privacy')->toString() . '" target="_blank" rel="noopener">adatkezelési tájékoztatóban</a>.</p>',
+        '#markup' => '<p><strong>Képernyőfelvétel:</strong> az online előadásról képernyőfelvétel készül. A résztvevők mikrofonja ebben a szekcióban nem aktív; a résztvevőlistában megjelenő név, profilkép és a csetben írt üzenetek a felvételen nem fognak szerepelni. Az előadásokat követő kérdés-válasz szekcióról nem készül felvétel. Részletek az <a href="' . Url::fromRoute('eforms_event.privacy')->toString() . '" target="_blank" rel="noopener">adatkezelési tájékoztatóban</a>.</p>',
       ],
       'segedlet' => [
         '#markup' => '<p>A csatlakozási linket e-mailben küldjük. A csatlakozáshoz <a href="' . Url::fromRoute('eforms_event.teams_guide')->toString() . '" target="_blank" rel="noopener">képes Teams-segédlet</a> is segít.</p>',
@@ -366,17 +357,12 @@ class RegistrationForm extends FormBase {
       return;
     }
 
-    // Hang-hozzájárulás csak az online alkalomnál értelmezett — személyes
-    // beküldésnél akkor is hamis, ha a rejtett jelölőt bepipálták.
-    $hang_hozzajarulas = $esemeny === 'online' && (bool) $form_state->getValue('hang_hozzajarulas');
-
     $registration = Registration::create([
       'name' => $nev,
       'email' => $email,
       'phone' => $telefon,
       'occasion' => $esemeny,
       'gdpr' => TRUE,
-      'audio_consent' => $hang_hozzajarulas,
     ]);
     $registration->save();
 
