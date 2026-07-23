@@ -34,6 +34,24 @@ function eforms_event_update_10002(): string {
 }
 
 /**
+ * Fotóhozzájárulás-mezők telepítése (személyes alkalom GDPR).
+ */
+function eforms_event_update_10004(): string {
+  $update_manager = \Drupal::entityDefinitionUpdateManager();
+  foreach ([
+    'photo_consent' => 'Hozzájárult fotó készítéséhez',
+    'photo_publish_consent' => 'Hozzájárult a fotók közzétételéhez',
+  ] as $name => $label) {
+    $field = BaseFieldDefinition::create('boolean')
+      ->setLabel($label)
+      ->setDefaultValue(FALSE)
+      ->setInitialValue(FALSE);
+    $update_manager->installFieldStorageDefinition($name, 'eforms_registration', 'eforms_event', $field);
+  }
+  return 'A fotóhozzájárulás-mezők telepítve.';
+}
+
+/**
  * Alkalmankénti regisztrációs határidő a globális helyett.
  */
 function eforms_event_update_10003(): string {

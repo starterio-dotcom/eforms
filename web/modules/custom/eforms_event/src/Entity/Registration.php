@@ -87,6 +87,16 @@ class Registration extends ContentEntityBase {
       ->setDefaultValue(0)
       ->setInitialValue(0);
 
+    $fields['photo_consent'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Hozzájárult fotó készítéséhez'))
+      ->setDefaultValue(FALSE)
+      ->setInitialValue(FALSE);
+
+    $fields['photo_publish_consent'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Hozzájárult a fotók közzétételéhez'))
+      ->setDefaultValue(FALSE)
+      ->setInitialValue(FALSE);
+
     return $fields;
   }
 

@@ -103,6 +103,12 @@ footer { background: var(--indigo-1100); color: #fff; margin-top: 64px; }
 .evopt--disabled:hover { border-color: var(--border-neutral-subtle); }
 .gdpr { display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 12px; background: var(--cold-grey-100, #f5f7fa); border: 1px solid var(--border-neutral-divider); }
 .gdpr p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--text-neutral-subtle); }
+
+/* Alkalomfüggő adatkezelési blokkok — a kiválasztott rádió vezérli. */
+.gdpr-cond { display: none; }
+.panel:has(.evsel input[value="szemelyes"]:checked) .gdpr-cond--szemelyes { display: flex; }
+.panel:has(.evsel input[value="online"]:checked) .gdpr-cond--online { display: flex; }
+.gdpr-cond__title { font-weight: 700; font-size: 14px; color: var(--text-neutral-strong) !important; }
 .subrow { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .subrow .note { font-size: 13px; color: var(--text-neutral-subtle); }
 .stage { display: flex; justify-content: center; padding: 56px 24px 80px; }

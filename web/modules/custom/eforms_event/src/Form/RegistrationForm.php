@@ -215,6 +215,33 @@ class RegistrationForm extends FormBase {
       $form['fs_gdpr']['box']['gdpr_error'] = $this->feedback($errors['gdpr'], 'eforms-gdpr-error');
     }
 
+    // Alkalomfüggő adatkezelési blokkok — a CSS :has() mutatja a kiválasztott
+    // alkalomhoz tartozót, szerveroldalon pedig csak a releváns érték tárolódik.
+    $contact = (string) $this->configFactory()->get('eforms_event.settings')->get('contact_email');
+    $form['fs_gdpr']['szemelyes_extra'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['gdpr', 'gdpr-cond', 'gdpr-cond--szemelyes']],
+      'cim' => ['#markup' => '<p class="gdpr-cond__title">Fotókészítés a személyes alkalmon</p>'],
+      'foto_keszites' => [
+        '#type' => 'checkbox',
+        '#title' => 'Hozzájárulok, hogy a rendezvényen rólam fotó készüljön.',
+      ],
+      'foto_kozzetetel' => [
+        '#type' => 'checkbox',
+        '#title' => 'Hozzájárulok, hogy az Adatkezelő a rólam készült fotókat a képzés honlapján és közösségimédia-felületein eredménykommunikációs céllal megjelenítse.',
+      ],
+      'megjegyzes' => [
+        '#markup' => Markup::create('<p>Mindkét hozzájárulás önkéntes, a részvételnek nem feltétele, és bármikor visszavonható a(z) <a href="mailto:' . Html::escape($contact) . '">' . Html::escape($contact) . '</a> címen.</p>'),
+      ],
+    ];
+    $form['fs_gdpr']['online_extra'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['gdpr', 'gdpr-cond', 'gdpr-cond--online']],
+      'megjegyzes' => [
+        '#markup' => '<p><strong>Képernyőfelvétel:</strong> az online alkalomról képernyőfelvétel készül. A résztvevők kamerája és mikrofonja az esemény alatt nem aktív; a résztvevőlistában megjelenő név és a csetben írt üzenetek a felvételen szerepelhetnek. Aki nem szeretné, hogy kérdése a felvételen megjelenjen, kérdését az esemény után e-mailben is felteheti. Részletek az <a href="' . Url::fromRoute('eforms_event.privacy')->toString() . '" target="_blank" rel="noopener">adatkezelési tájékoztatóban</a>.</p>',
+      ],
+    ];
+
     // Küldés.
     $form['actions'] = [
       '#type' => 'actions',
@@ -343,12 +370,19 @@ class RegistrationForm extends FormBase {
       return;
     }
 
+    // Fotóhozzájárulás csak a személyes alkalomnál értelmezett — online
+    // beküldésnél akkor is hamis, ha a rejtett jelölőt bepipálták.
+    $foto_keszites = $esemeny === 'szemelyes' && (bool) $form_state->getValue('foto_keszites');
+    $foto_kozzetetel = $esemeny === 'szemelyes' && (bool) $form_state->getValue('foto_kozzetetel');
+
     $registration = Registration::create([
       'name' => $nev,
       'email' => $email,
       'phone' => $telefon,
       'occasion' => $esemeny,
       'gdpr' => TRUE,
+      'photo_consent' => $foto_keszites,
+      'photo_publish_consent' => $foto_kozzetetel,
     ]);
     $registration->save();
 
