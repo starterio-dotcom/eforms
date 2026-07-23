@@ -15,6 +15,9 @@ function eforms_theme_preprocess_page(array &$variables): void {
   $variables['grey_view'] = $route !== 'eforms_event.page';
   $variables['show_footer'] = $route === 'eforms_event.page';
   $variables['has_eforms'] = \Drupal::moduleHandler()->moduleExists('eforms_event');
+  $variables['reg_open'] = $variables['has_eforms']
+    ? \Drupal::service('eforms_event.capacity')->isOpen()
+    : TRUE;
 }
 
 /**

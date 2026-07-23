@@ -53,12 +53,27 @@ class EventController extends ControllerBase {
   }
 
   /**
+   * A határidő közelében (±1 óra) kikapcsolja az anonim oldalgyorsítótárat,
+   * hogy a lezárás pontosan a határidőnél jelenjen meg. Egyéb esetben a
+   * cron-alapú érvénytelenítés gondoskodik az átbillenésről.
+   */
+  protected function handleDeadlineCaching(): void {
+    $deadline = $this->capacity->getDeadline();
+    if ($deadline && abs($deadline->getTimestamp() - time()) < 3600) {
+      $this->pageCacheKillSwitch->trigger();
+    }
+  }
+
+  /**
    * Eseményoldal (címlap).
    */
   public function eventPage(): array {
+    $this->handleDeadlineCaching();
     $config = $this->config('eforms_event.settings');
     return [
       '#theme' => 'eforms_event_page',
+      '#reg_open' => $this->capacity->isOpen(),
+      '#deadline_label' => $this->capacity->getDeadlineLabel(),
       '#occasions' => $this->capacity->getOccasions(),
       '#program' => $config->get('program') ?: [],
       '#speakers' => [
@@ -89,12 +104,26 @@ class EventController extends ControllerBase {
   }
 
   /**
-   * Regisztrációs oldal.
+   * Regisztrációs oldal — lejárt határidő után lezárt állapotot mutat.
    */
   public function registerPage(): array {
+    $this->handleDeadlineCaching();
+
+    if (!$this->capacity->isOpen()) {
+      return [
+        '#theme' => 'eforms_register_closed',
+        '#deadline_label' => $this->capacity->getDeadlineLabel(),
+        '#contact_email' => $this->config('eforms_event.settings')->get('contact_email') ?: '',
+        '#cache' => [
+          'tags' => ['config:eforms_event.settings'],
+        ],
+      ];
+    }
+
     return [
       '#theme' => 'eforms_register_page',
       '#form' => $this->formBuilder()->getForm(RegistrationForm::class),
+      '#deadline_label' => $this->capacity->getDeadlineLabel(),
       '#cache' => [
         'tags' => ['eforms_registration_list', 'config:eforms_event.settings'],
         'contexts' => ['url.query_args:alkalom'],

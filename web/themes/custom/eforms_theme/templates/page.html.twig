@@ -13,7 +13,7 @@
     {% if has_eforms %}
       {% if show_back %}
         <a class="back" href="{{ path('eforms_event.page') }}"><i class="ri-arrow-left-line" aria-hidden="true"></i>Vissza az eseményoldalra</a>
-      {% else %}
+      {% elseif reg_open %}
         <a class="dap-btn dap-btn--medium" href="{{ path('eforms_event.register') }}">Regisztráció</a>
       {% endif %}
     {% endif %}

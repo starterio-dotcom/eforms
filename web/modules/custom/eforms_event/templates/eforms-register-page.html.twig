@@ -8,6 +8,9 @@
   <div class="page-head">
     <h1>Regisztráció</h1>
     <p>eForms felkészítő szakmai tájékoztató nap · A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei. A csillaggal (*) jelölt mezők kitöltése kötelező.</p>
+    {% if deadline_label %}
+      <p><strong>Regisztrációs határidő: {{ deadline_label }}</strong></p>
+    {% endif %}
   </div>
   <div class="layout">
     {{ form }}

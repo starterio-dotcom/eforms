@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\eforms_event\Form;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\eforms_event\Service\Capacity;
@@ -47,6 +48,25 @@ class CapacitySettingsForm extends ConfigFormBase {
 
     $form['info'] = [
       '#markup' => '<p>A <em>szabad helyek</em> számítása: kapacitás − (induló foglaltság + beérkezett regisztrációk). A módosítás mentés után azonnal megjelenik az eseményoldalon és a regisztrációs űrlapon.</p>',
+    ];
+
+    // Regisztrációs határidő.
+    $deadline_raw = (string) $this->config('eforms_event.settings')->get('registration_deadline');
+    $is_open = $this->capacity->isOpen();
+    $form['deadline'] = [
+      '#type' => 'details',
+      '#title' => 'Regisztrációs határidő',
+      '#open' => TRUE,
+    ];
+    $form['deadline']['allapot'] = [
+      '#markup' => '<p><strong>A regisztráció jelenleg: ' . ($is_open ? 'NYITVA' : 'LEZÁRVA') . '</strong>'
+      . ($this->capacity->getDeadlineLabel() ? ' · határidő: ' . $this->capacity->getDeadlineLabel() : ' · nincs határidő beállítva') . '</p>',
+    ];
+    $form['deadline']['registration_deadline'] = [
+      '#type' => 'datetime',
+      '#title' => 'Határidő',
+      '#default_value' => $deadline_raw !== '' ? new DrupalDateTime($deadline_raw) : NULL,
+      '#description' => 'Eddig az időpontig lehet regisztrálni; utána a regisztráció automatikusan lezár minden felületen. Üresen hagyva a regisztráció nyitva marad.',
     ];
 
     foreach ($occasions as $key => $occasion) {
@@ -107,8 +127,12 @@ class CapacitySettingsForm extends ConfigFormBase {
       $config->set('occasions.' . $key . '.capacity', (int) $values['capacity']);
       $config->set('occasions.' . $key . '.base_taken', (int) $values['base_taken']);
     }
+    $deadline = $form_state->getValue('registration_deadline');
+    $config->set('registration_deadline', $deadline instanceof DrupalDateTime ? $deadline->format('Y-m-d\TH:i:s') : '');
     $config->save();
-    $this->messenger()->addStatus('A kapacitás-beállítások mentve. A nyilvános oldalak azonnal frissültek.');
+    // A nyitva/lezárva állapotjelző szinkronban tartása a cron-logikával.
+    \Drupal::state()->set('eforms_event.reg_open', $this->capacity->isOpen());
+    $this->messenger()->addStatus('A beállítások mentve. A nyilvános oldalak azonnal frissültek.');
   }
 
 }

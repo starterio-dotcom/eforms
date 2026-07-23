@@ -18,9 +18,18 @@
       <span class="meta-chip"><i class="ri-calendar-event-line" aria-hidden="true"></i>2026. augusztus 12. · személyes</span>
       <span class="meta-chip"><i class="ri-live-line" aria-hidden="true"></i>2026. augusztus 13. · online</span>
       <span class="meta-chip"><i class="ri-money-euro-circle-line" aria-hidden="true"></i>A részvétel ingyenes</span>
+      {% if not reg_open %}
+        <span class="meta-chip"><i class="ri-lock-line" aria-hidden="true"></i>A regisztráció lezárult</span>
+      {% elseif deadline_label %}
+        <span class="meta-chip"><i class="ri-time-line" aria-hidden="true"></i>Regisztráció: {{ deadline_label }}-ig</span>
+      {% endif %}
     </div>
     <div class="cta">
-      <a class="dap-btn" href="{{ path('eforms_event.register') }}">Regisztrálok</a>
+      {% if reg_open %}
+        <a class="dap-btn" href="{{ path('eforms_event.register') }}">Regisztrálok</a>
+      {% else %}
+        <span class="dap-btn dap-btn--disabled" aria-disabled="true">A regisztráció lezárult</span>
+      {% endif %}
       <a class="dap-btn dap-btn--ondark" href="#program">Program megtekintése</a>
     </div>
   </div>
@@ -61,7 +70,9 @@
           </div>
         </div>
         <div class="evc-cta">
-          {% if o.full %}
+          {% if not reg_open %}
+            <span class="dap-btn dap-btn--medium dap-btn--secondary dap-btn--block dap-btn--disabled" aria-disabled="true">A regisztráció lezárult</span>
+          {% elseif o.full %}
             <span class="dap-btn dap-btn--medium dap-btn--secondary dap-btn--block" aria-disabled="true">Betelt</span>
           {% else %}
             <a class="dap-btn dap-btn--medium dap-btn--block{{ o.cta_variant == 'secondary' ? ' dap-btn--secondary' }}" href="{{ path('eforms_event.register', {}, {'query': {'alkalom': key}}) }}">{{ o.cta_label }}</a>

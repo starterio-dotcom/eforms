@@ -40,6 +40,8 @@ if [ ! -f "$DB" ] || [ ! -f "$SETTINGS" ]; then
   drush_run -y config:set system.site default_langcode hu || true
   # Az alapértelmezett (magyar) URL-ek prefix nélkül szolgálnak ki.
   drush_run -y config:set language.negotiation url.prefixes.hu '' || true
+  # Magyar időzóna — a regisztrációs határidő ebben értelmeződik.
+  drush_run -y config:set system.date timezone.default Europe/Budapest || true
   # Demó környezet: a levelek a mail-gyűjtőbe kerülnek (nincs SMTP a konténerben).
   drush_run -y config:set system.mail interface.default test_mail_collector
   drush_run -y cache:rebuild

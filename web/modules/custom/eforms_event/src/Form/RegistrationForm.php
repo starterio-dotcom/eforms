@@ -250,6 +250,13 @@ class RegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
+    // Ha a beküldés a határidő után érkezik (pl. sokáig nyitva hagyott
+    // űrlapról), a lezárt állapotot mutató oldalra irányítunk.
+    if (!$this->capacity->isOpen()) {
+      $form_state->setRedirect('eforms_event.register');
+      return;
+    }
+
     $occasions = $this->capacity->getOccasions();
     $input = $form_state->getUserInput();
     $esemeny = (string) ($input['esemeny'] ?? '');

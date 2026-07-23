@@ -5,6 +5,9 @@ eforms_event.settings:
     contact_email:
       type: email
       label: 'Kapcsolattartó e-mail'
+    registration_deadline:
+      type: string
+      label: 'Regisztrációs határidő (Y-m-d\TH:i:s, site időzónában; üres = nincs)'
     occasions:
       type: mapping
       label: 'Alkalmak'

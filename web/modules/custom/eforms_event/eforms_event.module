@@ -16,11 +16,20 @@ function eforms_event_theme(array $existing, string $type, string $theme, string
         'program' => [],
         'speakers' => [],
         'contact_email' => '',
+        'reg_open' => TRUE,
+        'deadline_label' => '',
       ],
     ],
     'eforms_register_page' => [
       'variables' => [
         'form' => NULL,
+        'deadline_label' => '',
+      ],
+    ],
+    'eforms_register_closed' => [
+      'variables' => [
+        'deadline_label' => '',
+        'contact_email' => '',
       ],
     ],
     'eforms_done' => [
@@ -60,6 +69,21 @@ function eforms_event_themes_installed(array $theme_list): void {
     if (!in_array($block->id(), $keep, TRUE)) {
       $block->delete();
     }
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * A határidő átlépésekor érvényteleníti a gyorsítótárazott nyilvános
+ * oldalakat, hogy a lezárt állapot külső esemény nélkül is megjelenjen.
+ */
+function eforms_event_cron(): void {
+  $open = \Drupal::service('eforms_event.capacity')->isOpen();
+  $last = \Drupal::state()->get('eforms_event.reg_open');
+  if ($last === NULL || (bool) $last !== $open) {
+    \Drupal::state()->set('eforms_event.reg_open', $open);
+    \Drupal\Core\Cache\Cache::invalidateTags(['config:eforms_event.settings']);
   }
 }
 

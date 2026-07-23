@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Lezárt regisztráció — a határidő lejárta után megjelenő oldal.
+ *
+ * Változók:
+ * - deadline_label: a határidő magyar formátumban.
+ * - contact_email: kapcsolattartó e-mail.
+ */
+#}
+<div class="stage">
+  <div class="ccard">
+    <span class="check check--muted"><i class="ri-lock-line" aria-hidden="true"></i></span>
+    <h1>A regisztráció lezárult</h1>
+    <p class="clead">
+      {% if deadline_label %}
+        A regisztrációs határidő ({{ deadline_label }}) lejárt, új regisztrációt már nem tudunk fogadni.
+      {% else %}
+        A regisztráció lezárult, új regisztrációt már nem tudunk fogadni.
+      {% endif %}
+    </p>
+    <div class="dap-callout dap-callout--informative">
+      <div class="dap-callout__body">
+        <div class="dap-callout__title">Lemaradt volna?</div>
+        <div class="dap-callout__text">Írjon a <a href="mailto:{{ contact_email }}">{{ contact_email }}</a> címre — ha felszabadul hely, vagy pótalkalmat hirdetünk, értesítjük.</div>
+      </div>
+    </div>
+    <a class="dap-btn dap-btn--medium" href="{{ path('eforms_event.page') }}">Vissza az eseményoldalra</a>
+  </div>
+</div>
