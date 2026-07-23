@@ -181,6 +181,12 @@ footer { background: var(--indigo-1100); color: #fff; margin-top: 64px; }
 .dap-field .form-tel.error { border-color: var(--text-negative-base); }
 .dap-helper { font-size: 13.5px; line-height: 1.5; color: var(--text-neutral-subtle); }
 
+/* „Erre gondolt?” e-mail-javaslat */
+.email-hint { font-size: 14px; line-height: 1.5; color: var(--text-neutral-base); }
+.email-hint__apply { background: none; border: 0; padding: 0; color: var(--text-brand-base); font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; }
+.email-hint__apply:hover { color: var(--brand-1100); }
+.email-hint__apply:focus-visible { outline: 2px solid var(--brand-1000); outline-offset: 2px; border-radius: 4px; }
+
 /* Jelölőnégyzet */
 .dap-field--checkbox { flex-direction: row; align-items: flex-start; gap: 8px; }
 .dap-field--checkbox label { font-weight: 500; font-size: 16px; line-height: 1.4; color: var(--text-neutral-base); cursor: pointer; }

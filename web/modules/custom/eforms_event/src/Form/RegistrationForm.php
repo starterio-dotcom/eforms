@@ -65,6 +65,7 @@ class RegistrationForm extends FormBase {
 
     $form['#attributes']['class'][] = 'panel';
     $form['#attributes']['novalidate'] = 'novalidate';
+    $form['#attached']['library'][] = 'eforms_event/email_hint';
 
     if ($errors) {
       $form['error_callout'] = [
@@ -235,6 +236,34 @@ class RegistrationForm extends FormBase {
   }
 
   /**
+   * Fogad-e levelet az e-mail-cím tartománya (MX/A rekord ellenőrzés).
+   *
+   * Az ismert nagy szolgáltatóknál nincs DNS-kérés; bizonytalan DNS-hiba
+   * esetén átengedjük (fail-open) — csak az egyértelműen nemlétező
+   * tartományt utasítjuk el.
+   *
+   * @return string|null
+   *   Hibaüzenet, vagy NULL, ha a tartomány rendben van.
+   */
+  protected function checkEmailDomain(string $email): ?string {
+    $domain = strtolower(substr((string) strrchr($email, '@'), 1));
+    $known = [
+      'gmail.com', 'freemail.hu', 'citromail.hu', 't-online.hu',
+      'outlook.com', 'hotmail.com', 'yahoo.com', 'icloud.com', 'indamail.hu',
+    ];
+    if ($domain === '' || in_array($domain, $known, TRUE)) {
+      return NULL;
+    }
+    $ascii = function_exists('idn_to_ascii') ? (idn_to_ascii($domain) ?: $domain) : $domain;
+    // Záró pont: a resolver ne fűzzön hozzá helyi keresési domaint.
+    $host = rtrim($ascii, '.') . '.';
+    if (!checkdnsrr($host, 'MX') && !checkdnsrr($host, 'A') && !checkdnsrr($host, 'AAAA')) {
+      return 'A megadott e-mail-cím tartománya (' . $domain . ') nem érhető el. Kérjük, ellenőrizze az elírásokat.';
+    }
+    return NULL;
+  }
+
+  /**
    * Mezőhiba a DÁP FeedbackMessage komponens markupjával.
    */
   protected function feedback(string $message, string $id = ''): array {
@@ -300,6 +329,9 @@ class RegistrationForm extends FormBase {
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $errors['email'] = 'Adjon meg érvényes e-mail-címet.';
+    }
+    elseif (($mx_error = $this->checkEmailDomain($email)) !== NULL) {
+      $errors['email'] = $mx_error;
     }
     if (!$gdpr) {
       $errors['gdpr'] = 'A regisztrációhoz el kell fogadnia az adatkezelési tájékoztatót.';
