@@ -1,4 +1,10 @@
 contact_email: 'ekroktatas@ujvilag.gov.hu'
+# A levelekben szereplő abszolút linkek bázis-URL-je (séma + hoszt + esetleges
+# alkönyvtár, záró / nélkül). Parancssorból/cronból küldött leveleknél nincs
+# HTTP-kérés, ezért a request-alapú abszolút URL „http://default”-ot adna —
+# ez a beállítás gondoskodik a helyes hosztról. Üresen hagyva a request
+# kontextusát használja (böngészős beküldésnél az is helyes).
+site_base_url: ''
 teams_link: ''
 emails:
   szemelyes:

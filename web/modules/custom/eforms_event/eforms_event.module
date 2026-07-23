@@ -117,6 +117,19 @@ function eforms_event_mail(string $key, array &$message, array $params): void {
     return;
   }
   $config = \Drupal::config('eforms_event.settings');
+
+  // Parancssorból/cronból küldött leveleknél nincs valós HTTP-kérés, így a
+  // request-alapú abszolút URL „http://default”-ot adna. Ha van beállított
+  // bázis-URL és a kérés kontextusa üres/„default”, azt használjuk a
+  // linkekhez — a böngészős (valós kérésű) beküldést nem érinti.
+  $base = (string) $config->get('site_base_url');
+  if ($base !== '') {
+    $context = \Drupal::service('router.request_context');
+    if (in_array($context->getHost(), ['', 'default'], TRUE)) {
+      $context->fromUri($base);
+    }
+  }
+
   $template_key = match ($key) {
     'teams_invite' => 'teams',
     'reminder' => 'emlekezteto_' . ($params['occasion'] ?? ''),

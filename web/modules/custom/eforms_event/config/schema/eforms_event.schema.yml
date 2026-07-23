@@ -5,6 +5,9 @@ eforms_event.settings:
     contact_email:
       type: email
       label: 'Kapcsolattartó e-mail'
+    site_base_url:
+      type: string
+      label: 'A levélbeli linkek bázis-URL-je (üres = a kérés kontextusa)'
     teams_link:
       type: string
       label: 'Microsoft Teams értekezlet csatlakozási linkje'
