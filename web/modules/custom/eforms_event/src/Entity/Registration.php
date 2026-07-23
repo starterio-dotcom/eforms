@@ -54,15 +54,18 @@ class Registration extends ContentEntityBase {
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Teljes név'))
       ->setRequired(TRUE)
-      ->setSetting('max_length', 255);
+      ->setSetting('max_length', 255)
+      ->setDisplayOptions('form', ['type' => 'string_textfield', 'weight' => -5]);
 
     $fields['email'] = BaseFieldDefinition::create('email')
       ->setLabel(t('E-mail-cím'))
-      ->setRequired(TRUE);
+      ->setRequired(TRUE)
+      ->setDisplayOptions('form', ['type' => 'email_default', 'weight' => -4]);
 
     $fields['phone'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Telefonszám'))
-      ->setSetting('max_length', 64);
+      ->setSetting('max_length', 64)
+      ->setDisplayOptions('form', ['type' => 'string_textfield', 'weight' => -3]);
 
     $fields['occasion'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Alkalom'))

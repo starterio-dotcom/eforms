@@ -8,10 +8,11 @@ use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Regisztráció szerkesztése — adminisztrátori megjegyzés hozzáfűzése.
+ * Regisztráció szerkesztése — az admin módosíthatja a résztvevő nevét,
+ * e-mail-címét, telefonszámát és a belső megjegyzést.
  *
- * Csak a megjegyzés-mező szerkeszthető; a regisztráció adatai
- * tájékoztatásul, olvasásra jelennek meg.
+ * Az alkalom és a beküldés ideje csak tájékoztatásul, olvasásra jelenik meg:
+ * az alkalom módosítása kapacitás- és levélautomatika-mellékhatásokkal járna.
  */
 class RegistrationEditForm extends ContentEntityForm {
 
@@ -28,9 +29,6 @@ class RegistrationEditForm extends ContentEntityForm {
       'online' => 'Online részvétel',
     ];
     $rows = [
-      ['Teljes név', $registration->get('name')->value],
-      ['E-mail-cím', $registration->get('email')->value],
-      ['Telefonszám', $registration->get('phone')->value ?: '—'],
       ['Alkalom', $occasions[$registration->get('occasion')->value] ?? $registration->get('occasion')->value],
       ['Beküldve', \Drupal::service('date.formatter')->format((int) $registration->get('created')->value, 'short')],
     ];
@@ -51,7 +49,7 @@ class RegistrationEditForm extends ContentEntityForm {
    */
   public function save(array $form, FormStateInterface $form_state): int {
     $result = parent::save($form, $form_state);
-    $this->messenger()->addStatus('A megjegyzés mentve.');
+    $this->messenger()->addStatus('A regisztráció módosításai mentve.');
     $form_state->setRedirect('entity.eforms_registration.collection');
     return $result;
   }

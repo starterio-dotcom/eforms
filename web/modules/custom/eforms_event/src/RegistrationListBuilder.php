@@ -68,7 +68,7 @@ class RegistrationListBuilder extends EntityListBuilder {
   public function getDefaultOperations(EntityInterface $entity): array {
     $operations = parent::getDefaultOperations($entity);
     if (isset($operations['edit'])) {
-      $operations['edit']['title'] = $this->t('Megjegyzés szerkesztése');
+      $operations['edit']['title'] = $this->t('Szerkesztés');
     }
     if (isset($operations['delete'])) {
       $operations['delete']['title'] = $this->t('Törlés');
