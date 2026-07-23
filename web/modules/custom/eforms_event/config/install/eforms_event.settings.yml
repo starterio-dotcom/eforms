@@ -103,7 +103,7 @@ occasions:
   szemelyes:
     label: 'Személyes részvétel'
     date: '2026-08-12'
-    deadline: '2026-08-10T23:59:59'
+    deadline: '2026-08-11T19:59:59'
     date_label: '2026. augusztus 12., szerda'
     day: '12'
     month: 'aug'
@@ -128,7 +128,7 @@ occasions:
   online:
     label: 'Online részvétel'
     date: '2026-08-13'
-    deadline: '2026-08-11T23:59:59'
+    deadline: '2026-08-12T23:59:59'
     date_label: '2026. augusztus 13., csütörtök'
     day: '13'
     month: 'aug'
