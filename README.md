@@ -73,6 +73,11 @@ docker compose exec web vendor/bin/drush cr
   Teams-link be van állítva az admin **Kapacitások** fülön. A link beállítása
   előtt beérkezett regisztrációk „függőben” állapotba kerülnek, és a link
   mentésekor (vagy cronból) automatikusan megkapják a meghívót.
+- **Levélbeli linkek (fontos élesítéskor)**: a cronból/parancssorból küldött
+  leveleknél (Teams-meghívó, emlékeztető) nincs HTTP-kérés, ezért a linkek
+  hosztját a `site_base_url` konfig adja. Élesítéskor állítsd a valós nyilvános
+  címre: `drush config:set eforms_event.settings site_base_url https://pelda.hu/eforms`.
+  Üresen hagyva csak a böngészőből indított beküldések linkjei lesznek helyesek.
 - **Emlékeztető**: az esemény előtti napon a rendszer (cronból) minden
   regisztrálónak alkalom-specifikus emlékeztető e-mailt küld. Az időzítés az
   `occasions.*.date` (ISO dátum) konfigkulcsokon alapul, a küldési ablak az

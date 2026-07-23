@@ -42,6 +42,9 @@ if [ ! -f "$DB" ] || [ ! -f "$SETTINGS" ]; then
   drush_run -y config:set language.negotiation url.prefixes.hu '' || true
   # Magyar időzóna — a regisztrációs határidő ebben értelmeződik.
   drush_run -y config:set system.date timezone.default Europe/Budapest || true
+  # A levélbeli linkek bázis-URL-je (cronból/CLI-ből küldött leveleknél kell,
+  # mert ott nincs HTTP-kérés). Élesben a valós nyilvános URL-re állítsd.
+  drush_run -y config:set eforms_event.settings site_base_url "${EFORMS_BASE_URL:-http://localhost:8090}" || true
   # Demó környezet: a levelek a mail-gyűjtőbe kerülnek (nincs SMTP a konténerben).
   drush_run -y config:set system.mail interface.default test_mail_collector
   drush_run -y cache:rebuild
