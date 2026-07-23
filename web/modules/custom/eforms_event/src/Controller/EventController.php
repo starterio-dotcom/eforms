@@ -81,7 +81,7 @@ class EventController extends ControllerBase {
       '#speakers' => [
         [
           'name' => 'Tótka Tamás',
-          'lines' => ['szakmai igazgató · Új Világ Nonprofit Szolgáltató Kft.', 'Megnyitó beszéd'],
+          'lines' => ['szakmai igazgató · Új Világ Nonprofit Szolgáltató Kft.'],
           'image' => $this->speakerImage('totka-tamas'),
         ],
         [
