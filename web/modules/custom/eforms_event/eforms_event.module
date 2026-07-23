@@ -120,13 +120,21 @@ function eforms_event_mail(string $key, array &$message, array $params): void {
 
   // Parancssorból/cronból küldött leveleknél nincs valós HTTP-kérés, így a
   // request-alapú abszolút URL „http://default”-ot adna. Ha van beállított
-  // bázis-URL és a kérés kontextusa üres/„default”, azt használjuk a
-  // linkekhez — a böngészős (valós kérésű) beküldést nem érinti.
+  // bázis-URL és a kérés kontextusa üres/„default”, beállítjuk a router
+  // kontextusát belőle — a böngészős (valós kérésű) beküldést nem érinti.
+  // (A Symfony fromUri() a Drupal alosztályán nem hat megbízhatóan, ezért
+  // explicit setterekkel állítjuk be.)
   $base = (string) $config->get('site_base_url');
   if ($base !== '') {
     $context = \Drupal::service('router.request_context');
-    if (in_array($context->getHost(), ['', 'default'], TRUE)) {
-      $context->fromUri($base);
+    if (in_array($context->getHost(), ['', 'default'], TRUE) && ($parts = parse_url($base)) && !empty($parts['host'])) {
+      $scheme = $parts['scheme'] ?? 'https';
+      $context->setScheme($scheme);
+      $context->setHost($parts['host']);
+      if (isset($parts['port'])) {
+        $scheme === 'https' ? $context->setHttpsPort($parts['port']) : $context->setHttpPort($parts['port']);
+      }
+      $context->setBaseUrl(isset($parts['path']) ? rtrim($parts['path'], '/') : '');
     }
   }
 
