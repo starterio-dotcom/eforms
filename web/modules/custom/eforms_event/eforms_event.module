@@ -89,16 +89,38 @@ function eforms_event_cron(): void {
 
 /**
  * Implements hook_mail().
+ *
+ * Alkalmanként külön visszaigazoló levél (személyes / online), a
+ * eforms_event.settings „emails” sablonjaiból. Helyettesítők:
+ * @nev, @datum, @kapcsolat, @menetrend.
  */
 function eforms_event_mail(string $key, array &$message, array $params): void {
   if ($key !== 'confirmation') {
     return;
   }
+  $config = \Drupal::config('eforms_event.settings');
+  $template = $config->get('emails.' . ($params['occasion'] ?? ''));
+
+  $replacements = [
+    '@nev' => $params['nev'] ?? '',
+    '@datum' => $params['date_label'] ?? '',
+    '@kapcsolat' => $config->get('contact_email') ?: '',
+    '@menetrend' => \Drupal\Core\Url::fromRoute('eforms_event.page', [], ['absolute' => TRUE])->toString(),
+  ];
+
+  if ($template && !empty($template['body'])) {
+    $message['subject'] = strtr($template['subject'] ?? 'Szakmai tájékoztató nap jelentkezés megerősítve', $replacements);
+    foreach (explode("\n\n", trim(strtr($template['body'], $replacements))) as $paragraph) {
+      $message['body'][] = $paragraph;
+    }
+    return;
+  }
+
+  // Tartalék általános szöveg, ha nincs sablon az adott alkalomhoz.
   $message['subject'] = 'Visszaigazolás — eForms felkészítő szakmai tájékoztató nap · 2026';
-  $message['body'][] = 'Kedves ' . $params['nev'] . '!';
+  $message['body'][] = 'Kedves ' . ($params['nev'] ?? '') . '!';
   $message['body'][] = 'Köszönjük, regisztrációját rögzítettük az eForms felkészítő szakmai tájékoztató napra.';
-  $message['body'][] = 'Időpont: ' . $params['date_label'] . ' · ' . $params['time_label'];
-  $message['body'][] = 'Részvétel módja: ' . $params['mode'];
-  $message['body'][] = 'Szervező: Új Világ Nonprofit Szolgáltató Kft.';
-  $message['body'][] = 'Kérdés esetén: ' . $params['contact_email'];
+  $message['body'][] = 'Időpont: ' . ($params['date_label'] ?? '') . ' · ' . ($params['time_label'] ?? '');
+  $message['body'][] = 'Részvétel módja: ' . ($params['mode'] ?? '');
+  $message['body'][] = 'Kérdés esetén: ' . $replacements['@kapcsolat'];
 }

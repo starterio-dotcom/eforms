@@ -8,6 +8,14 @@ eforms_event.settings:
     registration_deadline:
       type: string
       label: 'Regisztrációs határidő (Y-m-d\TH:i:s, site időzónában; üres = nincs)'
+    emails:
+      type: mapping
+      label: 'Visszaigazoló levelek'
+      mapping:
+        szemelyes:
+          type: eforms_event.email_template
+        online:
+          type: eforms_event.email_template
     occasions:
       type: mapping
       label: 'Alkalmak'
@@ -39,6 +47,17 @@ eforms_event.settings:
           eloado:
             type: label
             label: 'Előadó'
+
+eforms_event.email_template:
+  type: mapping
+  label: 'E-mail sablon'
+  mapping:
+    subject:
+      type: label
+      label: 'Tárgy'
+    body:
+      type: text
+      label: 'Törzs (helyettesítők: @nev, @datum, @kapcsolat, @menetrend)'
 
 eforms_event.occasion:
   type: mapping

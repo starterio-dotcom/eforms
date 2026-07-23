@@ -265,6 +265,18 @@ class RegistrationForm extends FormBase {
     $telefon = trim((string) $form_state->getValue('telefon', ''));
     $gdpr = (bool) $form_state->getValue('gdpr');
 
+    // Érvénytelen bájtsorozatú (nem UTF-8) beküldés kiszűrése — ez rontott
+    // rekordot és üres levéltörzset okozna (a preg /u üresre fut rajta).
+    if (!mb_check_encoding($nev, 'UTF-8')) {
+      $nev = '';
+    }
+    if (!mb_check_encoding($email, 'UTF-8')) {
+      $email = '';
+    }
+    if (!mb_check_encoding($telefon, 'UTF-8')) {
+      $telefon = '';
+    }
+
     $errors = [];
     if (!isset($occasions[$esemeny])) {
       $errors['esemeny'] = 'Válasszon egy alkalmat a részvételhez.';
@@ -301,6 +313,7 @@ class RegistrationForm extends FormBase {
     $occasion = $occasions[$esemeny];
     try {
       $this->mailManager->mail('eforms_event', 'confirmation', $email, 'hu', [
+        'occasion' => $esemeny,
         'nev' => $nev,
         'date_label' => $occasion['date_label'],
         'time_label' => $occasion['time_label'],

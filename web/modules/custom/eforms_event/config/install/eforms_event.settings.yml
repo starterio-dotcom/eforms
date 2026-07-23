@@ -1,5 +1,44 @@
 contact_email: 'ekroktatas@ujvilag.gov.hu'
 registration_deadline: '2026-08-10T23:59:59'
+emails:
+  szemelyes:
+    subject: 'Szakmai tájékoztató nap jelentkezés megerősítve'
+    body: |
+      Tisztelt @nev!
+
+      Ezúton igazoljuk vissza „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” megnevezésű szakmai tájékoztató napra való jelentkezését az alábbiak szerint.
+
+      Tájékoztató nap dátuma: @datum
+      Részvétel módja: személyes jelenlét
+
+      Kezdési időpont: 10:00 óra. Kérjük, hogy a pontos kezdés érdekében legalább 30 perccel korábban szíveskedjenek megérkezni a helyszínre; a regisztráció 09:30 és 10:00 óra között zajlik.
+
+      A szakmai tájékoztató nap helyszíne: 1077 Budapest, Kéthly Anna tér 1. (Myhive Greenpoint 7 irodaház), II. emelet, 261-es tárgyaló. Az irodaházat kérjük a Klauzál utcai bejárat felől megközelíteni; a tárgyaló a Klauzál utca felőli oldalon található liftekkel érhető el.
+
+      A helyszínen parkolás biztosítása nem megoldható, ennek okán kérjük, hogy a parkolási lehetőségekről a szakmai tájékoztató napot megelőzően szíveskedjen tájékozódni.
+
+      A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+  online:
+    subject: 'Szakmai tájékoztató nap jelentkezés megerősítve'
+    body: |
+      Tisztelt @nev!
+
+      Ezúton igazoljuk vissza „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” megnevezésű szakmai tájékoztató napra való jelentkezését az alábbiak szerint.
+
+      Tájékoztató nap dátuma: @datum
+      Részvétel módja: online — Microsoft Teams
+
+      A Microsoft Teams értekezlet csatlakozási linkjét tartalmazó meghívót külön üzenetben, a regisztráció során megadott elektronikus levelezési címre küldjük ki, automatikus rendszerüzenet formájában — legkésőbb a szakmai tájékoztató nap reggelén, 08:00 óráig.
+
+      Amennyiben az üzenetet ezen időpontig nem kapja meg, kérjük, jelezze részünkre az @kapcsolat címen, vagy keresse oktatásszervezési kollégáinkat a +36 1 465-8899 telefonszámon.
+
+      A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
 occasions:
   szemelyes:
     label: 'Személyes részvétel'
