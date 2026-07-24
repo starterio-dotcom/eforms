@@ -1,0 +1,22 @@
+uuid: 8b37700d-75fe-40fe-940f-97d995cb2441
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - eforms_theme
+_core:
+  default_config_hash: hLiPOGk0rPJWWB2QgsEHH2q_djAxZKIE8S9UMGpS2G8
+id: eforms_theme_content
+theme: eforms_theme
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Fő tartalom'
+  label_display: '0'
+  provider: system
+visibility: {  }

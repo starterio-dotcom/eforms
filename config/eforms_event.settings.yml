@@ -1,0 +1,204 @@
+_core:
+  default_config_hash: SdWJFKO9U6XC3rHld3nMipAJ_VMIapxKv0KiSQJ95Bo
+contact_email: ekroktatas@ujvilag.gov.hu
+site_base_url: 'http://localhost:8090'
+teams_link: ''
+emails:
+  szemelyes:
+    subject: 'Szakmai tájékoztató nap jelentkezés megerősítve'
+    body: |-
+      Tisztelt @nev!
+
+      Ezúton igazoljuk vissza „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” megnevezésű szakmai tájékoztató napra való jelentkezését az alábbiak szerint.
+
+      Tájékoztató nap dátuma: @datum
+      Részvétel módja: személyes jelenlét
+
+      Kezdési időpont: 10:00 óra. Kérjük, hogy a pontos kezdés érdekében legalább 30 perccel korábban szíveskedjenek megérkezni a helyszínre; a regisztráció 09:30 és 10:00 óra között zajlik.
+
+      A szakmai tájékoztató nap helyszíne: 1077 Budapest, Kéthly Anna tér 1. (Myhive Greenpoint 7 irodaház), II. emelet, 261-es tárgyaló. Az irodaházat kérjük a Klauzál utcai bejárat felől megközelíteni; a tárgyaló a Klauzál utca felőli oldalon található liftekkel érhető el.
+
+      A helyszínen parkolás biztosítása nem megoldható, ennek okán kérjük, hogy a parkolási lehetőségekről a szakmai tájékoztató napot megelőzően szíveskedjen tájékozódni.
+
+      A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+  online:
+    subject: 'Szakmai tájékoztató nap jelentkezés megerősítve'
+    body: |-
+      Tisztelt @nev!
+
+      Ezúton igazoljuk vissza „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” megnevezésű szakmai tájékoztató napra való jelentkezését az alábbiak szerint.
+
+      Tájékoztató nap dátuma: @datum
+      Részvétel módja: online — Microsoft Teams
+
+      A Microsoft Teams értekezlet csatlakozási linkjét tartalmazó meghívót külön üzenetben, a regisztráció során megadott elektronikus levelezési címre küldjük ki, automatikus rendszerüzenet formájában — legkésőbb a szakmai tájékoztató nap reggelén, 08:00 óráig.
+
+      Amennyiben az üzenetet ezen időpontig nem kapja meg, kérjük, jelezze részünkre az @kapcsolat címen, vagy keresse oktatásszervezési kollégáinkat a +36 1 465-8899 telefonszámon.
+
+      A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+  teams:
+    subject: 'Microsoft Teams meghívó — szakmai tájékoztató nap'
+    body: |-
+      Tisztelt @nev!
+
+      Ezzel az üzenettel küldjük „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” szakmai tájékoztató nap (@datum) Microsoft Teams csatlakozási linkjét.
+
+      Az értekezlethez az alábbi linkre kattintva tud csatlakozni:
+      @link
+
+      A csatlakozás röviden:
+      1. Kattintson a fenti linkre.
+      2. Válassza a „Folytatás ebben a böngészőben” lehetőséget, vagy nyissa meg a Teams alkalmazást.
+      3. A kamera/mikrofon engedélykérésnél az „Engedélyezés” és a „Letiltás” is megfelelő — ezekre nincs szükség.
+      4. Adja meg a TELJES NEVÉT (a jelentkezéskor megadottat), majd kattintson a „Csatlakozás” / „Join now” gombra.
+      5. Kérjük, várjon, míg kollégáink beengedik.
+
+      Képernyőképes, részletes csatlakozási segédlet (böngészőből és a Teams alkalmazásból is):
+      @segedlet
+
+      Fontos: amennyiben nem a jelentkezéskor megadott névvel próbál csatlakozni, kollégáink nem tudják Önt beengedni.
+
+      Tájékoztatjuk, hogy az online előadásról képernyőfelvétel készül. A résztvevők mikrofonja ebben a szekcióban nem aktív; a résztvevőlistában megjelenő név, profilkép és a csetben írt üzenetek a felvételen nem fognak szerepelni. Az előadásokat követő kérdés-válasz szekcióról nem készül felvétel. Részletek az adatkezelési tájékoztatóban: @adatkezeles
+
+      Kérdés esetén: @kapcsolat
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+  emlekezteto_szemelyes:
+    subject: 'Emlékeztető — szakmai tájékoztató nap holnap'
+    body: |-
+      Tisztelt @nev!
+
+      Emlékeztetjük, hogy „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” szakmai tájékoztató nap, amelyre személyes részvétellel regisztrált, holnap, @datum kerül megrendezésre.
+
+      Helyszín: 1077 Budapest, Kéthly Anna tér 1. (Myhive Greenpoint 7 irodaház), II. emelet, 261-es tárgyaló. Az irodaházat kérjük a Klauzál utcai bejárat felől megközelíteni; a tárgyaló a Klauzál utca felőli oldalon található liftekkel érhető el.
+
+      A program 10:00 órakor kezdődik; kérjük, hogy a helyszíni regisztrációhoz 09:30 és 10:00 óra között érkezzen meg. A helyszínen parkolás biztosítása nem megoldható, ezért kérjük, előzetesen tájékozódjon a parkolási lehetőségekről.
+
+      A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Amennyiben mégsem tud részt venni, kérjük, jelezze a @kapcsolat címen.
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+  emlekezteto_online:
+    subject: 'Emlékeztető — szakmai tájékoztató nap holnap (online)'
+    body: |-
+      Tisztelt @nev!
+
+      Emlékeztetjük, hogy „A nemzeti eljárások megújulása és az önálló részkezelés új lehetőségei” szakmai tájékoztató nap, amelyre online részvétellel regisztrált, holnap, @datum kerül megrendezésre. A program 10:00 órakor kezdődik.
+
+      A Microsoft Teams csatlakozási linket és a csatlakozási segédletet külön üzenetben küldtük, illetve küldjük ki — legkésőbb a tájékoztató nap reggelén, 08:00 óráig. Amennyiben nem találja, ellenőrizze a levélszemét mappát is, vagy jelezze részünkre a @kapcsolat címen, illetve a +36 1 465-8899 telefonszámon.
+
+      A szakmai tájékoztató nap menetrendje itt érhető el: @menetrend
+
+      Üdvözlettel:
+      Új Világ Nonprofit Szolgáltató Kft., Oktatásszervezés
+occasions:
+  szemelyes:
+    label: 'Személyes részvétel'
+    date: '2026-08-12'
+    deadline: '2026-08-11T19:59:59'
+    date_label: '2026. augusztus 12., szerda'
+    day: '12'
+    month: aug
+    time_label: '10:00 – 13:10'
+    detail: 'Budapest, Kéthly Anna tér 1., II. emelet, 261-es tárgyaló'
+    capacity: 50
+    base_taken: 41
+    done_note: ' · regisztráció a helyszínen 09:30-tól'
+    done_mode: 'Személyes részvétel — Budapest, Kéthly Anna tér 1., II. emelet, 261-es tárgyaló'
+    cta_label: 'Regisztráció a személyes alkalomra'
+    cta_variant: primary
+    rows:
+      -
+        icon: ri-map-pin-2-line
+        text: 'Budapest, Kéthly Anna tér 1., II. emelet, 261-es tárgyaló'
+      -
+        icon: ri-time-line
+        text: '10:00 – 13:10 · regisztráció 09:30-tól'
+      -
+        icon: ri-group-line
+        text: 'Legfeljebb 50 fő'
+  online:
+    label: 'Online részvétel'
+    date: '2026-08-13'
+    deadline: '2026-08-12T23:59:59'
+    date_label: '2026. augusztus 13., csütörtök'
+    day: '13'
+    month: aug
+    time_label: '10:00 – 13:10'
+    detail: 'Élő közvetítés — a linket e-mailben küldjük'
+    capacity: 100
+    base_taken: 37
+    done_note: ''
+    done_mode: 'Online részvétel — a csatlakozási linket e-mailben küldjük'
+    cta_label: 'Regisztráció az online alkalomra'
+    cta_variant: secondary
+    rows:
+      -
+        icon: ri-live-line
+        text: 'Élő online közvetítés — a linket e-mailben küldjük'
+      -
+        icon: ri-time-line
+        text: '10:00 – 13:10'
+      -
+        icon: ri-group-line
+        text: 'Legfeljebb 100 fő'
+program:
+  -
+    ido: '09:30 – 10:00'
+    cim: Regisztráció
+    tipus: brk
+    pontok: {  }
+    eloado: ''
+  -
+    ido: '10:00 – 10:10'
+    cim: 'Megnyitó beszéd'
+    tipus: ''
+    pontok: {  }
+    eloado: 'Tótka Tamás, szakmai igazgató · Új Világ Nonprofit Szolgáltató Kft.'
+  -
+    ido: '10:10 – 11:10'
+    cim: 'A nemzeti hirdetmények megújulása az EKR-ben'
+    tipus: ''
+    pontok:
+      - 'A 44/2015. (XI. 2.) MvM rendelet 2026. szeptember 1-jén hatályba lépő módosításai'
+      - 'A nemzeti hirdetmények tartalmának és kitöltési logikájának új, mező szintű szabályozása (KTM közlemény)'
+      - 'A jövőbeni uniós változások (celex, SDK) lekövetése nemzeti és uniós szinten'
+      - 'A nemzeti hirdetmény űrlapok új struktúrája, egységesebb terminológia és validációs működés az uniós eForms logika mentén'
+      - 'A nemzeti és uniós értékkészletek közelítése; az eltérő értékkészletek indoka'
+      - 'Nemzeti nem hirdetményes űrlapok átalakítása az uniós űrlapok mentén'
+      - 'A hirdetmények megfelelő töltését segítő új űrlap tooltip-ek'
+      - 'Korrigendumok egységes kezelése'
+    eloado: 'dr. Zámbó Ákos, főosztályvezető · Nemzeti Fejlesztési Központ, Közbeszerzési Monitoring Főosztály'
+  -
+    ido: '11:10 – 11:40'
+    cim: Szünet
+    tipus: brk
+    pontok: {  }
+    eloado: ''
+  -
+    ido: '11:40 – 12:40'
+    cim: 'Új funkciók, folyamat változások és az átállás kezelése'
+    tipus: ''
+    pontok:
+      - 'Részek önálló kezelése: részenkénti összegezés és eredmény tájékoztatás lehetősége nemzeti eljárásokban'
+      - 'Részek önálló visszavonásának új lehetősége uniós és nemzeti eljárásokban'
+      - 'Szerződés-menedzser modul átalakítása'
+      - 'DBR meghosszabbítási lehetőség nemzeti eljárásrendben is'
+      - 'EKR-n kívüli, további ajánlattevők rögzítése új eljárási cselekmény bevezetésével'
+      - 'Folyamatban lévő eljárások kezelése az átállás során'
+    eloado: 'dr. Poroszkai Gabriella, felelős akkreditált közbeszerzési szaktanácsadó, fejlesztő oldali EKR termékfelelős'
+  -
+    ido: '12:40 – 13:10'
+    cim: 'Kérdések és válaszok'
+    tipus: ''
+    pontok: {  }
+    eloado: 'Mindhárom előadó'

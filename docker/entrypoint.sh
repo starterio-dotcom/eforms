@@ -48,6 +48,15 @@ if [ ! -f "$DB" ] || [ ! -f "$SETTINGS" ]; then
   # Demó környezet: a levelek a mail-gyűjtőbe kerülnek (nincs SMTP a konténerben).
   drush_run -y config:set system.mail interface.default test_mail_collector
   drush_run -y cache:rebuild
+  # Site-szintű konfiguráció-szinkron a repó gyökér config/ mappájából
+  # (drush config:export / config:import ide dolgozik).
+  chmod u+w "$SETTINGS"
+  if grep -q "^\$settings\['config_sync_directory'\]" "$SETTINGS"; then
+    sed -i "s#^\$settings\['config_sync_directory'\] = .*#\$settings['config_sync_directory'] = '/var/www/html/config';#" "$SETTINGS"
+  else
+    echo "\$settings['config_sync_directory'] = '/var/www/html/config';" >> "$SETTINGS"
+  fi
+  chmod 444 "$SETTINGS"
   cp "$SETTINGS" "$FILES/settings.backup.php"
   chown www-data:www-data "$FILES/settings.backup.php"
   echo ">>> Kész. Belépés: admin / ${EFORMS_ADMIN_PASSWORD:-admin}"

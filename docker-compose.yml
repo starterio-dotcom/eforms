@@ -11,6 +11,8 @@ services:
       # Az egyedi kód élőben szerkeszthető (módosítás után: drush cr).
       - ./web/modules/custom:/var/www/html/web/modules/custom
       - ./web/themes/custom:/var/www/html/web/themes/custom
+      # Site-szintű konfiguráció-export célkönyvtára (drush config:export/import).
+      - ./config:/var/www/html/config
     environment:
       EFORMS_ADMIN_PASSWORD: admin
 
